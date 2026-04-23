@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MemorizeX — Learn Your Lines</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.9/babel.min.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;transition:background 0.4s,color 0.4s}
+:root{--bg2:rgba(255,255,255,0.03);--bg3:rgba(255,255,255,0.04);--bg4:rgba(255,255,255,0.05);--brd:rgba(255,255,255,0.06);--brd2:rgba(255,255,255,0.08);--brd3:rgba(255,255,255,0.1);--brd4:rgba(255,255,255,0.12);--t1:#e8e0d4;--t2:rgba(255,255,255,0.5);--t3:rgba(255,255,255,0.4);--t4:rgba(255,255,255,0.35);--t5:rgba(255,255,255,0.3);--t6:rgba(255,255,255,0.25);--t7:rgba(255,255,255,0.2);--t8:rgba(255,255,255,0.12);--card:#0e0d0c;--modal:rgba(0,0,0,0.8);--accent:#D4A054;--accent-bg:rgba(212,160,84,0.08);--accent-bg2:rgba(212,160,84,0.12);--accent-bg3:rgba(212,160,84,0.15);--accent-border:rgba(212,160,84,0.25);--accent-border2:rgba(212,160,84,0.3);--accent-dim:rgba(212,160,84,0.45);--accent-med:rgba(212,160,84,0.6);--accent-bright:rgba(212,160,84,0.7);--accent-glow:rgba(212,160,84,0.07)}
+@keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes cardIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:rgba(255,255,255,0.03)}
+::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.1);border-radius:3px}
+.btn-press:active:not(:disabled){transform:scale(0.96)!important;transition-duration:80ms!important}
+@keyframes revealLine{from{opacity:0;transform:translateY(14px);filter:blur(8px)}to{opacity:1;transform:translateY(0);filter:blur(0)}}
+@keyframes shake{0%,100%{transform:translateX(0)}15%{transform:translateX(-8px)}30%{transform:translateX(8px)}45%{transform:translateX(-5px)}60%{transform:translateX(5px)}75%{transform:translateX(-2px)}90%{transform:translateX(2px)}}
+@keyframes confettiFall{0%{transform:translateY(0) rotate(0deg);opacity:1}80%{opacity:0.7}100%{transform:translateY(105vh) rotate(720deg);opacity:0}}
+@keyframes pulseGreen{0%,100%{box-shadow:0 0 0 0 rgba(163,190,140,0)}50%{box-shadow:0 0 0 7px rgba(163,190,140,0.22)}}
+@keyframes pulseRed{0%,100%{box-shadow:0 0 0 0 rgba(191,97,106,0)}50%{box-shadow:0 0 0 7px rgba(191,97,106,0.22)}}
+.btn-pulse-green{animation:pulseGreen 2.2s ease-in-out infinite}
+.btn-pulse-red{animation:pulseRed 2.2s ease-in-out 0.5s infinite}
+input::placeholder{color:var(--t7)}
+textarea::placeholder{color:var(--t7)}
+body.light ::-webkit-scrollbar-track{background:rgba(0,0,0,0.03)}
+body.light ::-webkit-scrollbar-thumb{background:rgba(0,0,0,0.12);border-radius:3px}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script>const SCRIPTS = [{"id": "fungus-among-us", "title": "Fungus Among Us", "author": "Joseph Arnone", "cast": "2-Person", "genre": "Comedy", "setting": "Apartment · Evening", "desc": "Two roommates, a filthy fridge, and something moving in the macaroni.", "characters": ["MARA", "ALEXA"], "emoji": {"MARA": "🍷", "ALEXA": "📺"}, "lines": [{"c": "MARA", "l": "Oh! What a freaking day and a half! I am so ready to drink."}, {"c": "ALEXA", "l": "How was your day?"}, {"c": "MARA", "l": "Absolutely miserable! I am in pain, physical pain!"}, {"c": "MARA", "l": "Want some?"}, {"c": "ALEXA", "l": "No thanks."}, {"c": "MARA", "l": "What are you watching?"}, {"c": "ALEXA", "l": "Some show about pawn shops."}, {"c": "MARA", "l": "What do they sell, cheap thrills?"}, {"c": "ALEXA", "l": "No, I said PAWN shop."}, {"c": "MARA", "l": "Oh! Got it."}, {"c": "ALEXA", "l": "Do you smell that?"}, {"c": "MARA", "l": "What?"}, {"c": "ALEXA", "l": "There's a whiff, a very distinctive aroma... like... like something dead."}, {"c": "MARA", "l": "I hope we don't have a dead rat in the place."}, {"c": "ALEXA", "l": "Shhh... it's horrid... here... the refrigerator."}, {"c": "MARA", "l": "What is it? What? What?"}, {"c": "ALEXA", "l": "How disgusting!"}, {"c": "MARA", "l": "Is it a rat?"}, {"c": "ALEXA", "l": "It's old food in our fridge."}, {"c": "MARA", "l": "Is that all?"}, {"c": "ALEXA", "l": "You must be joking?"}, {"c": "MARA", "l": "I thought it was serious."}, {"c": "ALEXA", "l": "Food that smells like a rotting corpse doesn't bother you none?"}, {"c": "MARA", "l": "I'm used to it, actually."}, {"c": "ALEXA", "l": "Just once I would like to see you clean out the refrigerator Mara. It's unbelievable! You think you would have some freaking decency. Why do I always have to do it?!"}, {"c": "ALEXA", "l": "YOU'RE the one who spills the ice tea or the soda! YOU'RE the one that loves keeping food wrapped up until it becomes moldy!"}, {"c": "ALEXA", "l": "Look at this stuff. Look at this! Macaroni and Cheese that has been in here three Macaroni and Cheeses ago!"}, {"c": "ALEXA", "l": "Look at this Mara, a dish of left over chinese food that has all kinds of yellow, blue, green and white mold on it! Beautiful! That looks appetizing."}, {"c": "ALEXA", "l": "You have got to be kidding me, right? I am NOT cleaning it up this time."}, {"c": "ALEXA", "l": "YOU CAN! You can clean it all up and wash out the refrigerator, actually, SCRUB the inside of the refrigerator from God only knows what else because I am just fed up with this mess."}, {"c": "ALEXA", "l": "What is it? What?!"}, {"c": "MARA", "l": "It moved. Something in the macaroni and cheese bowl moved."}, {"c": "ALEXA", "l": "Oh my God!"}, {"c": "MARA", "l": "It was wiggling."}, {"c": "ALEXA", "l": "Wiggling? Like a worm?"}, {"c": "MARA", "l": "Yes!! It was like an anaconda!"}, {"c": "ALEXA", "l": "Cover it quickly!"}, {"c": "MARA", "l": "I am not going near that thing."}, {"c": "ALEXA", "l": "We need to get rid of it before it crawls out from the bowl."}, {"c": "MARA", "l": "It moved again! Hurry, get the trash."}, {"c": "MARA", "l": "Okay, I got it. You hold the garbage can under the counter and I will swat the bowl into it with this broom."}, {"c": "ALEXA", "l": "That's your plan?"}, {"c": "MARA", "l": "That's all I got!"}, {"c": "ALEXA", "l": "I'm afraid to get too close. What if you miss the garbage?"}, {"c": "MARA", "l": "I grew up with three brothers, baseball was my life... I got this."}, {"c": "ALEXA", "l": "Oh my God!"}, {"c": "MARA", "l": "Get closer! Closer to the counter. Okay, ready? Stay just like that... don't move. Count of three... ONE... TWO... THREE!!"}, {"c": "MARA", "l": "I got it! Alexa, I got it, I got it. It stopped moving."}, {"c": "ALEXA", "l": "You got it?"}, {"c": "MARA", "l": "It wasn't anything."}, {"c": "ALEXA", "l": "What do you mean?"}, {"c": "MARA", "l": "It was my imagination."}, {"c": "ALEXA", "l": "There was no, no anaconda?"}, {"c": "MARA", "l": "No, just fungus among us. My eyes must have played a trick on me. Never saw blue mac and cheese before so it tripped me out."}, {"c": "ALEXA", "l": "Okay... ummm, I need to calm down. I need to chill... can you---"}, {"c": "MARA", "l": "Oh yeah! I got this. I'll clean this up. I don't smell anything. It's like I'm immune."}, {"c": "ALEXA", "l": "I'm gonna go sterilize myself in the shower."}, {"c": "MARA", "l": "Yeah, you should. I'll tidy up, okay?"}, {"c": "ALEXA", "l": "Can you open the windows cause I'm gonna be sick."}, {"c": "MARA", "l": "Yeah, we'll light some candles too or something."}]}, {"id": "fight-over-fuchsia", "title": "Fight Over Fuchsia", "author": "Lindsay Price", "cast": "2-Person", "genre": "Comedy", "setting": "A Sale", "desc": "A fight over a blouse at the bargain low bargain big bargain sale fractures a friendship.", "characters": ["CARA-SUE", "SHIRLEY-ANN", "BOTH"], "emoji": {"CARA-SUE": "👛", "SHIRLEY-ANN": "👜", "BOTH": "👯"}, "lines": [{"c": "BOTH", "l": "Nah."}, {"c": "BOTH", "l": "Dang!"}, {"c": "CARA-SUE", "l": "What's she doing here?"}, {"c": "SHIRLEY-ANN", "l": "I can't believe she's here!"}, {"c": "BOTH", "l": "Please let her be gone, please let her be gone, please oh please oh please!"}, {"c": "BOTH", "l": "Dang!"}, {"c": "CARA-SUE", "l": "What's she doing here?"}, {"c": "SHIRLEY-ANN", "l": "I can't believe she's here."}, {"c": "CARA-SUE", "l": "I can't believe she'd show her face."}, {"c": "SHIRLEY-ANN", "l": "If I were her I would have died of shame."}, {"c": "CARA-SUE", "l": "She has some lot of nerve."}, {"c": "SHIRLEY-ANN", "l": "Shame!"}, {"c": "CARA-SUE", "l": "Nerve!"}, {"c": "SHIRLEY-ANN", "l": "Died of shame in a fiery car crash!"}, {"c": "CARA-SUE", "l": "Nervy nerve face!"}, {"c": "CARA-SUE", "l": "Why isn't she leaving?"}, {"c": "SHIRLEY-ANN", "l": "What's the matter with her?"}, {"c": "CARA-SUE", "l": "What is wrong with her?"}, {"c": "SHIRLEY-ANN", "l": "What's she doing?"}, {"c": "BOTH", "l": "Hmmmmm..."}, {"c": "SHIRLEY-ANN", "l": "I wonder..."}, {"c": "CARA-SUE", "l": "Maybe she's..."}, {"c": "SHIRLEY-ANN", "l": "Could she be..."}, {"c": "CARA-SUE", "l": "Maybe she's ready to apologize."}, {"c": "SHIRLEY-ANN", "l": "Maybe she IS filled with shame."}, {"c": "CARA-SUE", "l": "Oh the poor dear."}, {"c": "SHIRLEY-ANN", "l": "She should feel guilty."}, {"c": "BOTH", "l": "I deserve an apology."}, {"c": "CARA-SUE", "l": "Shirley-Ann."}, {"c": "SHIRLEY-ANN", "l": "Cara-Sue."}, {"c": "CARA-SUE", "l": "How are you?"}, {"c": "SHIRLEY-ANN", "l": "Well, thank you. How are you?"}, {"c": "CARA-SUE", "l": "I can't complain."}, {"c": "SHIRLEY-ANN", "l": "Ah..."}, {"c": "CARA-SUE", "l": "Yes?"}, {"c": "SHIRLEY-ANN", "l": "Yes?"}, {"c": "CARA-SUE", "l": "Did you say something?"}, {"c": "SHIRLEY-ANN", "l": "Did you have something to say?"}, {"c": "CARA-SUE", "l": "No, did you?"}, {"c": "SHIRLEY-ANN", "l": "Did you?"}, {"c": "CARA-SUE", "l": "Are you enjoying the sale?"}, {"c": "SHIRLEY-ANN", "l": "Yes. It is an excellent sale. Don't you agree?"}, {"c": "CARA-SUE", "l": "Yes. I am finding many marked down items."}, {"c": "SHIRLEY-ANN", "l": "Really. Many marked down items is a good thing."}, {"c": "CARA-SUE", "l": "Good things are good."}, {"c": "SHIRLEY-ANN", "l": "Many good things. Many things... Many things happen at a sale like this. Many, many things. Good and bad."}, {"c": "CARA-SUE", "l": "I must agree."}, {"c": "SHIRLEY-ANN", "l": "Oh do you?"}, {"c": "CARA-SUE", "l": "Yes. Many, many things."}, {"c": "SHIRLEY-ANN", "l": "I must say... If I were going to say something... I'm... somewhat... surprised to see you. At the sale."}, {"c": "CARA-SUE", "l": "Oh?"}, {"c": "SHIRLEY-ANN", "l": "Considering what happened. Last year. At the sale?"}, {"c": "CARA-SUE", "l": "Huh. Well, I must say I'm equally surprised at your presence. At the sale. Considering."}, {"c": "SHIRLEY-ANN", "l": "Considering what?"}, {"c": "CARA-SUE", "l": "You know what."}, {"c": "SHIRLEY-ANN", "l": "Why would that be, Cara-Sue? I can't think of one single solitary reason why YOU would be surprised to see ME at the sale. I have nothing to be embarrassed about, and NOTHING to apologize for."}, {"c": "CARA-SUE", "l": "Oh no?"}, {"c": "SHIRLEY-ANN", "l": "I did nothing wrong. Like SOME people."}, {"c": "CARA-SUE", "l": "Who SOME people?"}, {"c": "SHIRLEY-ANN", "l": "You know who SOME people are."}, {"c": "CARA-SUE", "l": "I don't know nothing about any SOME people."}, {"c": "SHIRLEY-ANN", "l": "Oh yes you do."}, {"c": "CARA-SUE", "l": "You stole my top!"}, {"c": "SHIRLEY-ANN", "l": "I saw it first!"}, {"c": "CARA-SUE", "l": "I called dibs!"}, {"c": "SHIRLEY-ANN", "l": "You stomped on my foot!"}, {"c": "CARA-SUE", "l": "You broke the pact!"}, {"c": "SHIRLEY-ANN", "l": "You attacked me!"}, {"c": "CARA-SUE", "l": "You deserved it!"}, {"c": "SHIRLEY-ANN", "l": "You look horrible in fuchsia!"}, {"c": "CARA-SUE", "l": "Shirley-Ann. Shirley-Ann."}, {"c": "SHIRLEY-ANN", "l": "Well. It's true."}, {"c": "CARA-SUE", "l": "Shirley-Ann."}, {"c": "SHIRLEY-ANN", "l": "It makes your face... funky. Sorry."}, {"c": "CARA-SUE", "l": "I can't believe you think that."}, {"c": "SHIRLEY-ANN", "l": "I'm doing you a favour."}, {"c": "CARA-SUE", "l": "How?"}, {"c": "SHIRLEY-ANN", "l": "I'm trying to spare your feelings."}, {"c": "CARA-SUE", "l": "You were supposed to be my friend. We were supposed to be friends for life."}, {"c": "SHIRLEY-ANN", "l": "Your friend? YOUR friend. You attacked me over a shirt Cara-Sue."}, {"c": "CARA-SUE", "l": "It's the bargain low bargain big bargain sale. The most important sale of the whole year. The only event that matters in my whole life!"}, {"c": "SHIRLEY-ANN", "l": "A sale? A stupid sale?"}, {"c": "CARA-SUE", "l": "Don't you belittle the bargain low bargain big bargain sale."}, {"c": "SHIRLEY-ANN", "l": "It was a stupid top!"}, {"c": "CARA-SUE", "l": "That top was going to make Jimmy-Joe ask me to the prom!"}, {"c": "SHIRLEY-ANN", "l": "He never would have asked you! Top or no top!"}, {"c": "CARA-SUE", "l": "Shirley-Ann. I can't believe you said that."}, {"c": "SHIRLEY-ANN", "l": "Dang."}, {"c": "SHIRLEY-ANN", "l": "It was a stupid top. It was a stupid fight. Don't you think so, Cara-Sue?"}, {"c": "CARA-SUE", "l": "I– I– I guess so."}, {"c": "SHIRLEY-ANN", "l": "Do you really?"}, {"c": "CARA-SUE", "l": "Do you?"}, {"c": "SHIRLEY-ANN", "l": "Do you?"}, {"c": "CARA-SUE", "l": "It was a stupid fight."}, {"c": "SHIRLEY-ANN", "l": "Can we agree on that?"}, {"c": "CARA-SUE", "l": "I guess."}, {"c": "SHIRLEY-ANN", "l": "So if you would just apologize..."}, {"c": "CARA-SUE", "l": "Why don't you? You go first."}, {"c": "SHIRLEY-ANN", "l": "You first."}, {"c": "CARA-SUE", "l": "We could be friends again. If you apologize."}, {"c": "SHIRLEY-ANN", "l": "You go first and I'll be your friend for life."}, {"c": "CARA-SUE", "l": "You."}, {"c": "SHIRLEY-ANN", "l": "You."}, {"c": "CARA-SUE", "l": "You."}, {"c": "SHIRLEY-ANN", "l": "Never!"}, {"c": "CARA-SUE", "l": "Fine."}, {"c": "SHIRLEY-ANN", "l": "Right. I have to go."}, {"c": "CARA-SUE", "l": "Yes. You should go."}, {"c": "SHIRLEY-ANN", "l": "I'll go. Enjoy the sale."}, {"c": "CARA-SUE", "l": "Thank you."}, {"c": "SHIRLEY-ANN", "l": "Cara-Sue?"}, {"c": "CARA-SUE", "l": "Yes?"}, {"c": "SHIRLEY-ANN", "l": "It may rain this afternoon."}, {"c": "CARA-SUE", "l": "It might."}, {"c": "SHIRLEY-ANN", "l": "It might."}, {"c": "CARA-SUE", "l": "Shirley-Ann?"}, {"c": "SHIRLEY-ANN", "l": "Uh huh?"}, {"c": "CARA-SUE", "l": "Make sure you cover your hair. If it rains. Your hair frizzes. A bit."}]}, {"id": "que-and-schelp", "title": "Que & Schelp", "author": "Joseph Arnone", "cast": "2-Person", "genre": "Comedy/Drama", "setting": "Motel · American South", "desc": "A couple in a motel room rehearses a scheme for tomorrow.", "characters": ["QUE", "SCHELP"], "emoji": {"QUE": "👑", "SCHELP": "🧢"}, "lines": [{"c": "QUE", "l": "Schelp, what time is it?"}, {"c": "SCHELP", "l": "I don't know, look at your phone, why you always bothering me?"}, {"c": "QUE", "l": "I'm bothering you by asking you for the time?"}, {"c": "SCHELP", "l": "You do it always. Always the little stupid questions you have to go on asking me about, like, 'where's the tv remote' or, 'Did you see my purse?' Who does that?"}, {"c": "QUE", "l": "I'm always askin' you cause you always into my shit and I don't want to spend all day looking for my belongings. Stay outta my shit and I won't have to ask you."}, {"c": "SCHELP", "l": "I ain't never in your things. Don't accuse me a something that ain't ever true."}, {"c": "QUE", "l": "I ain't accusing you of nothing, but the facts, darling. Get your facts straight and we cool."}, {"c": "QUE", "l": "Hey! Wutch you doin?"}, {"c": "SCHELP", "l": "Got any gum? I need something to chew—"}, {"c": "QUE", "l": "Told you, you always going through my things!"}, {"c": "SCHELP", "l": "Oh... well, got any?"}, {"c": "QUE", "l": "Damn idiot, ain't cha?"}, {"c": "SCHELP", "l": "GOT ANY?"}, {"c": "QUE", "l": "Nope. I just had the last piece. Still fresh in my mouth if you want it."}, {"c": "QUE", "l": "Why you such a damn knucklehead for?"}, {"c": "SCHELP", "l": "I dunno."}, {"c": "QUE", "l": "Cutest knucklehead I ever did see."}, {"c": "SCHELP", "l": "...So, we gonna rehearse or not?"}, {"c": "QUE", "l": "Again?"}, {"c": "SCHELP", "l": "We gotta get it right, don't we? I almost botched it all up last time."}, {"c": "QUE", "l": "That's cause you weren't in it, darling. You gotta get in it."}, {"c": "SCHELP", "l": "Are we gonna rehearse?"}, {"c": "QUE", "l": "Yeah, okay. Just once or twice cause this is my chill time, which is part of my preparation for tomorrow. I don't want to overwork it and screw up my flow."}, {"c": "SCHELP", "l": "Yeah, yeah, yeah, come on already."}, {"c": "QUE", "l": "Alright. Start by coming in and I'll play the man at the counter."}, {"c": "SCHELP", "l": "Okay."}, {"c": "SCHELP", "l": "Hello sir! Sir! Sir, there's a situation. I ran all the way here nonstop about a mile up the road, my girlfriend, she's pregnant and in labor, my car broke down. Please, please can you help me!"}, {"c": "QUE", "l": "That was stupid."}, {"c": "SCHELP", "l": "What?!"}, {"c": "QUE", "l": "That didn't work, Schelp. The story. You need a better story. I thought we already discussed this shit, man."}, {"c": "SCHELP", "l": "What am I supposed to say?"}, {"c": "QUE", "l": "Damn it. The point is to get this old fool out of his store, so I can go in right?"}, {"c": "SCHELP", "l": "Yeah."}, {"c": "QUE", "l": "Well, what's to stop him from calling an ambulance or something? We need something immediate to draw him out."}, {"c": "SCHELP", "l": "Okay, yeah. I got something! Let me just do it. I don't want to analyze."}, {"c": "QUE", "l": "Fine."}, {"c": "SCHELP", "l": "You ready?"}, {"c": "QUE", "l": "Yeah, come on, man."}, {"c": "SCHELP", "l": "Sir! Sir!"}, {"c": "QUE", "l": "Yes."}, {"c": "SCHELP", "l": "Sir, can you come with me real quick? My girlfriend is pregnant and just fainted up the road, and I can't seem to resuscitit her."}, {"c": "QUE", "l": "Wait, resuscitit? Did you just say resuscitit, Schelp?"}, {"c": "SCHELP", "l": "What's wrong with the—how do you say the darn word, Que?"}, {"c": "QUE", "l": "Damn you're dumb boy. It's resuscitate. Not tit. Tate. Got it? Like Channing Tatum, but resuscitate. Tate."}, {"c": "SCHELP", "l": "Damn girl, I got it, I got it."}, {"c": "QUE", "l": "I'm getting tired of this game. You either ready or you ain't, Schelp."}, {"c": "SCHELP", "l": "One last try. I'll jump right in. Sir! Sir! My mom, she's just fainted, can you please assist me? I can't pick her up, she's on the ground right outside. I need help. Please, real quick."}, {"c": "QUE", "l": "I mean, it sounds explanatory."}, {"c": "SCHELP", "l": "The dude ain't gonna mind read me Que, I gotta explain him the darn story, don't I?"}, {"c": "QUE", "l": "But, it's too long. Your emotion was better, but you was long-winded."}, {"c": "SCHELP", "l": "Aww man! How'm I gonna do this shit tomorrow?!"}, {"c": "QUE", "l": "You had it yesterday. What happened?"}, {"c": "SCHELP", "l": "I don't know. You keep criticizing me is making my nerves go bad."}, {"c": "QUE", "l": "Expect me to lie? We playin' high stakes."}, {"c": "SCHELP", "l": "Yeah, but you ain't helping me none."}, {"c": "QUE", "l": "You sit. Watch me."}, {"c": "QUE", "l": "Sir? Sir?"}, {"c": "SCHELP", "l": "Yes."}, {"c": "QUE", "l": "My mom collapsed just outside, I can't get her off the ground, PLEASE HELP!"}, {"c": "QUE", "l": "See? Easy peasy gravy baby."}, {"c": "SCHELP", "l": "I can't act like you."}, {"c": "QUE", "l": "Yes, you can."}, {"c": "SCHELP", "l": "You like really made me think your momma was outside."}, {"c": "QUE", "l": "In my mind she was... get it?"}, {"c": "SCHELP", "l": "Alright... alright."}, {"c": "QUE", "l": "Don't think about it, just jump right in."}, {"c": "SCHELP", "l": "Mister! My mother, she's collapsed just outside, PLEASE HELP US!!"}, {"c": "QUE", "l": "Nailed it."}, {"c": "SCHELP", "l": "Yeah?"}, {"c": "QUE", "l": "Crushed that shit."}, {"c": "SCHELP", "l": "Hell, yeah!"}, {"c": "QUE", "l": "Now you pull that shit just like that tomorrow and we gonna score it."}, {"c": "SCHELP", "l": "Ight."}, {"c": "QUE", "l": "Just like that. Short and intense."}, {"c": "SCHELP", "l": "What happens if the man don't buy it?"}, {"c": "QUE", "l": "He gonna buy it, Schelp."}, {"c": "SCHELP", "l": "But, I'm just sayin', what if he don't move."}, {"c": "QUE", "l": "Then you make him move."}, {"c": "SCHELP", "l": "I hear ya."}, {"c": "QUE", "l": "What?"}, {"c": "SCHELP", "l": "I hope it don't go down like that is all."}, {"c": "QUE", "l": "You gonna take care of me or not?"}, {"c": "SCHELP", "l": "Yeah."}, {"c": "QUE", "l": "Then you gotta do what it takes. Hey! I'm talkin' to you."}, {"c": "SCHELP", "l": "I know."}, {"c": "QUE", "l": "Whatever it takes."}, {"c": "SCHELP", "l": "Whatever it takes."}, {"c": "QUE", "l": "No doubt."}, {"c": "SCHELP", "l": "Uh-huh."}, {"c": "QUE", "l": "Besides, ain't like our gun has bullets anyhow, man. It's just a prop for a scene is all."}, {"c": "SCHELP", "l": "True that."}, {"c": "QUE", "l": "That's all this is... make believe. You feel me?"}, {"c": "SCHELP", "l": "Make believe..."}]}, {"id": "imaginary-you", "title": "Imaginary, You", "author": "Joseph Arnone", "cast": "2-Person", "genre": "Drama", "setting": "Waldo's Apartment · Evening", "desc": "A stoned writer is confronted by his older brother on the day of their father's funeral.", "characters": ["WALDO", "RALLYE"], "emoji": {"WALDO": "✍️", "RALLYE": "👔"}, "lines": [{"c": "RALLYE", "l": "Smells like something died in here!"}, {"c": "WALDO", "l": "Hello, Rallye. What's---"}, {"c": "RALLYE", "l": "I was knocking for ten minutes this time!"}, {"c": "WALDO", "l": "You want a beer or something, you seem a bit high strung---"}, {"c": "RALLYE", "l": "You forgot what today was?"}, {"c": "WALDO", "l": "...What's today?"}, {"c": "RALLYE", "l": "Our father's funeral."}, {"c": "WALDO", "l": "...Oh, shit...yeah, I uh, I know."}, {"c": "RALLYE", "l": "Why didn't you come?"}, {"c": "WALDO", "l": "I'm still going."}, {"c": "RALLYE", "l": "We buried him! Two hours ago!"}, {"c": "WALDO", "l": "Right, well...well, I plan on going, after everything, on my own time... How's Rita?"}, {"c": "RALLYE", "l": "Our mother is a wreck."}, {"c": "WALDO", "l": "Is she?"}, {"c": "RALLYE", "l": "Why don't you try calling her to find out?"}, {"c": "RALLYE", "l": "I just came by cause, I don't know...I just came by. I gotta head back to the island."}, {"c": "RALLYE", "l": "I go to work each day, busting my ass, raising a family. I own a house!"}, {"c": "WALDO", "l": "Yes, you do, you own a house, Rallye."}, {"c": "RALLYE", "l": "And you fart around all day in your disgusting robe, your place stinks, you smell like alleyway trash. Just living on your one book residuals! You're ridiculous. Go get a job! Pop out from your bubble and enter the real world."}, {"c": "WALDO", "l": "Okay."}, {"c": "RALLYE", "l": "What is this? Are you writing again?"}, {"c": "WALDO", "l": "It's just doodlebugs."}, {"c": "RALLYE", "l": "Have you been taking your meds?"}, {"c": "WALDO", "l": "Yes."}, {"c": "RALLYE", "l": "Let me see your prescription bottles."}, {"c": "WALDO", "l": "Rallye, please don't do that to me."}, {"c": "RALLYE", "l": "You know what will happen to you if you venture into this shit again, right?"}, {"c": "WALDO", "l": "I know."}, {"c": "RALLYE", "l": "Wake up Waldo, you can't go back in life. You can only go forward."}, {"c": "RALLYE", "l": "Dad's not around to protect you anymore, Waldo."}, {"c": "WALDO", "l": "I'm fine!"}, {"c": "WALDO", "l": "You don't have to behave this way with me; say the things you say."}, {"c": "RALLYE", "l": "You've been let off the hook your entire life. When are you ever going to get your life in order?"}, {"c": "WALDO", "l": "My life is in order, for me, based on how I'm living it and stuff."}, {"c": "RALLYE", "l": "Look around you...you call this order, Waldo?"}, {"c": "WALDO", "l": "It's organized chaos."}, {"c": "RALLYE", "l": "Tell me the truth...are you trying to write again?"}, {"c": "WALDO", "l": "Dribble drabble."}, {"c": "RALLYE", "l": "Are you trying to write again?"}, {"c": "RALLYE", "l": "I'm calling your doctor."}, {"c": "WALDO", "l": "Fuck off."}, {"c": "RALLYE", "l": "If you think you're going to put our family through another one of your meltdowns, you're sadly mistaken."}, {"c": "WALDO", "l": "Why are you getting involved?"}, {"c": "RALLYE", "l": "I'm your older brother!"}, {"c": "WALDO", "l": "But, it's my life!"}, {"c": "RALLYE", "l": "Not anymore, pal. All we have left is our mother, and I'm not letting you put her in an early grave, too."}, {"c": "WALDO", "l": "Fuck are you talking about?"}, {"c": "RALLYE", "l": "You know exactly what I'm saying."}, {"c": "WALDO", "l": "Please leave."}, {"c": "RALLYE", "l": "He'd still be alive if it wasn't for you."}, {"c": "WALDO", "l": "Leave."}, {"c": "RALLYE", "l": "Dragging him down for YEARS. Emotional, financial vampire! He believed in you and you're nothing but a failure. You destroyed our family!"}, {"c": "WALDO", "l": "...Feel better?"}, {"c": "RALLYE", "l": "I'll never feel better."}, {"c": "WALDO", "l": "I think you should go now, Rallye...you could go now."}, {"c": "RALLYE", "l": "At some point during your shitty ass day, call your mother."}, {"c": "WALDO", "l": "I will."}]}, {"id": "launch-date", "title": "Launch Date", "author": "Joseph Arnone", "cast": "2-Person", "genre": "Comedy", "setting": "Mr. Tandum's Study · Evening", "desc": "A wealthy eccentric tells his butler he plans to build a rocket ship to die on Mars.", "characters": ["MR. TANDUM", "BENNETT"], "emoji": {"MR. TANDUM": "🚀", "BENNETT": "🎩"}, "lines": [{"c": "BENNETT", "l": "You asked to see me, sir?"}, {"c": "MR. TANDUM", "l": "Sit down, Bennett. Make yourself comfortable. Would you like some brandy?"}, {"c": "BENNETT", "l": "Umm..."}, {"c": "MR. TANDUM", "l": "It's alright. Feel at ease. Brandy?"}, {"c": "BENNETT", "l": "Sure."}, {"c": "MR. TANDUM", "l": "Here you are...take a sip. Enjoy and feel relaxed. I need to ask you some questions, and I would like you to have as clear a mind as possible for optimal thought."}, {"c": "BENNETT", "l": "Yes. Brandy certainly helps one get optimized for optimum thought."}, {"c": "MR. TANDUM", "l": "Lovely. Now, if I was to build a rocket ship, what would be the very first thing I would do?"}, {"c": "BENNETT", "l": "A rocket ship, sir? For space?"}, {"c": "MR. TANDUM", "l": "That's right. I want to leave Earth at once and fly into the outer reaches of space, until I hit Mars. Kerplunk!"}, {"c": "BENNETT", "l": "I see."}, {"c": "MR. TANDUM", "l": "Well?"}, {"c": "BENNETT", "l": "Well, what, sir?"}, {"c": "MR. TANDUM", "l": "What do you think is the very first thing I should do to build my rocket?"}, {"c": "BENNETT", "l": "Well, I would have to say that you would need to reach out to experts in the field?"}, {"c": "MR. TANDUM", "l": "Right."}, {"c": "BENNETT", "l": "But, sir...why would you want to go to Mars, if you don't mind me asking...you apparently have everything here?"}, {"c": "MR. TANDUM", "l": "Death."}, {"c": "BENNETT", "l": "Death, sir?"}, {"c": "MR. TANDUM", "l": "That is correct."}, {"c": "BENNETT", "l": "What do you mean by...death?"}, {"c": "MR. TANDUM", "l": "You do know the definition of the word?"}, {"c": "BENNETT", "l": "Yes, sir."}, {"c": "MR. TANDUM", "l": "There you have it. I wish to shoot myself into orbit by way of a rocket, in order to die. A much more exciting adventure than what dear old father had done."}, {"c": "BENNETT", "l": "But why on Earth, sir?"}, {"c": "MR. TANDUM", "l": "Is that a pun?"}, {"c": "BENNETT", "l": "What, sir?"}, {"c": "MR. TANDUM", "l": "A pun my dear boy, a pun. And I'm asking you about rockets!"}, {"c": "BENNETT", "l": "Sir?"}, {"c": "MR. TANDUM", "l": "Mmm."}, {"c": "BENNETT", "l": "Are you feeling...well?"}, {"c": "MR. TANDUM", "l": "I feel spectacular!"}, {"c": "BENNETT", "l": "Right. Sir, when do you plan on having your rocket built?"}, {"c": "MR. TANDUM", "l": "Well, first there is a level of research, is there not? And then, then there will be time for construction, and finally, a launch date. Which reminds me, I will need you to be solely responsible for the launch date."}, {"c": "BENNETT", "l": "Launch date, sir?"}, {"c": "MR. TANDUM", "l": "Launch date. I want you to make sure all arrangements are met according to this paper right here!"}, {"c": "MR. TANDUM", "l": "I do believe, realistically, I will be launching myself into space within four years time."}, {"c": "BENNETT", "l": "Four years, sir?"}, {"c": "MR. TANDUM", "l": "Four more miserable years of this asinine existence and POOF, off to space I go to meet my alien friends. Yippy!"}, {"c": "BENNETT", "l": "Sir?"}, {"c": "MR. TANDUM", "l": "What?"}, {"c": "BENNETT", "l": "What will happen to me?"}, {"c": "MR. TANDUM", "l": "To you?"}, {"c": "BENNETT", "l": "Yes."}, {"c": "MR. TANDUM", "l": "Surely, you wouldn't desire to come?"}, {"c": "BENNETT", "l": "To Mars?"}, {"c": "MR. TANDUM", "l": "Precisely. That is to say, if we make it that far."}, {"c": "BENNETT", "l": "Well, I'm not sure. I've never considered such an enterprise as that."}, {"c": "MR. TANDUM", "l": "No, of course you haven't."}, {"c": "BENNETT", "l": "And if I were to remain here on Earth?"}, {"c": "MR. TANDUM", "l": "You are your own person, aren't you?"}, {"c": "BENNETT", "l": "But sir, where would I go? What would become of me?"}, {"c": "MR. TANDUM", "l": "Well, don't you have options?"}, {"c": "BENNETT", "l": "Afraid not."}, {"c": "MR. TANDUM", "l": "Why not?"}, {"c": "BENNETT", "l": "This is all I know, sir. If you recall, my whole life has been brought up to be your personal butler and assistant. My father before me with your father and his father before him, and so on. Your launch date will cause a break in the lineage...my rightful heritage..."}, {"c": "MR. TANDUM", "l": "All good things must come to their rightful resting place."}, {"c": "BENNETT", "l": "Yes, sir."}, {"c": "MR. TANDUM", "l": "Don't get any bright ideas."}, {"c": "BENNETT", "l": "Sir?"}, {"c": "MR. TANDUM", "l": "You know, pulling the old carpet out from under me, the old wool over my eyes bit, eh?"}, {"c": "BENNETT", "l": "I have no intention of the sort."}, {"c": "MR. TANDUM", "l": "Very well."}, {"c": "BENNETT", "l": "A bit more brandy, sir?"}, {"c": "MR. TANDUM", "l": "Of course."}, {"c": "MR. TANDUM", "l": "You see, Bennett, eagles fly alone and I my friend, have always been an eagle. We will build a rocket ship in the shape of an eagle, with claws and beak penetrating the open air, zipping through the atmosphere... kerplunk..."}, {"c": "BENNETT", "l": "Kerplunk."}, {"c": "MR. TANDUM", "l": "KERPLUNK!!!"}, {"c": "MR. TANDUM", "l": "That's the spirit!"}, {"c": "BENNETT", "l": "Will that be all, sir?"}, {"c": "MR. TANDUM", "l": "All? Why yes, all for now. Get to work! One must remain hush-hush about my rocket."}, {"c": "BENNETT", "l": "By all means, sir."}, {"c": "MR. TANDUM", "l": "By all means."}, {"c": "BENNETT", "l": "Yes, by all means, sir."}, {"c": "MR. TANDUM", "l": "Yes, yes, by all means."}, {"c": "BENNETT", "l": "Yes."}, {"c": "MR. TANDUM", "l": "Yes! HA! Be gone!"}]}, {"id": "the-docs", "title": "The Docs", "author": "Mike Swift", "cast": "2-Person", "genre": "Comedy", "setting": "Vaudeville Stage", "desc": "A classic vaudeville routine about doctors, diets, and the blues.", "characters": ["ALEX", "BOBBY"], "emoji": {"ALEX": "🎤", "BOBBY": "🤡"}, "lines": [{"c": "ALEX", "l": "How are you, Bobby?"}, {"c": "BOBBY", "l": "I'm just getting back from the doctor."}, {"c": "ALEX", "l": "You're just getting back from the doctor? Why is that?"}, {"c": "BOBBY", "l": "You see, I went on a diet, swore off candy and heavy eating, and in 14 days I had lost exactly two weeks. It's got me down in the dumps."}, {"c": "ALEX", "l": "You know, you have a ready wit."}, {"c": "BOBBY", "l": "I do? Alright, tell me when it's ready."}, {"c": "ALEX", "l": "So you're down in the dumps. Have you tried exercise?"}, {"c": "BOBBY", "l": "I went to play tennis and it just depressed me. No matter how good I get, I'll never be as good as a wall."}, {"c": "ALEX", "l": "So you're depressed. What did the doctor say?"}, {"c": "BOBBY", "l": "Well, I didn't have an appointment, so I hung around in the waiting room until somebody came in with my same symptoms, so I could get a 2 for 1."}, {"c": "ALEX", "l": "You're so cheap, you can't even pay attention! So, you were in the waiting room until somebody came in with your symptoms."}, {"c": "BOBBY", "l": "First, there was a man who broke his leg in two places. You know what the doctor told the man who broke his leg in two places?"}, {"c": "ALEX", "l": "Stop going to those places."}, {"c": "BOBBY", "l": "I thought it would help if I cheered up all the other patients in the waiting room. There was one little boy there, so I took him around and made everybody shake hands with him. It made him so happy he almost forgot he had the measles."}, {"c": "ALEX", "l": "Bobby, your friendliness is really contagious."}, {"c": "BOBBY", "l": "For the last guy, the doctor gave the man six months to live. But the man couldn't pay his bill, so he gave him another six months."}, {"c": "ALEX", "l": "So, what did the doctor say when he got to you?"}, {"c": "BOBBY", "l": "I told him I thought if I was rich it would cure the blues."}, {"c": "ALEX", "l": "You know, money can't make you happy."}, {"c": "BOBBY", "l": "All I am asking for is the chance to prove it."}, {"c": "ALEX", "l": "Good point."}, {"c": "ALEX", "l": "So now what?"}, {"c": "BOBBY", "l": "I've decided to be a comedian."}, {"c": "ALEX", "l": "I definitely think laughter is the best medicine."}, {"c": "BOBBY", "l": "Me too. And I intend to live forever."}, {"c": "ALEX", "l": "So far, so good."}]}, {"id": "mom-and-daughter", "title": "Mom & Daughter", "author": "Lindsay Price", "cast": "2-Person", "genre": "Drama", "setting": "Front seat of a car", "desc": "A mother tries to talk to her daughter after a scary night with a drunk boyfriend.", "characters": ["MOM", "DAUGHTER"], "emoji": {"MOM": "🚗", "DAUGHTER": "😤"}, "lines": [{"c": "MOM", "l": "Do you want to talk about it?"}, {"c": "DAUGHTER", "l": "No."}, {"c": "MOM", "l": "We should, a little."}, {"c": "DAUGHTER", "l": "I don't want to."}, {"c": "MOM", "l": "I respect that..."}, {"c": "DAUGHTER", "l": "Good."}, {"c": "MOM", "l": "Except that I do. Want to talk. Just a little."}, {"c": "DAUGHTER", "l": "I have nothing to say."}, {"c": "MOM", "l": "Yeah. Well, I'm the mom."}, {"c": "DAUGHTER", "l": "Figures."}, {"c": "MOM", "l": "And, might I add, you're not grounded. Yet."}, {"c": "DAUGHTER", "l": "I didn't do anything wrong."}, {"c": "MOM", "l": "Driving without a license is pretty wrong."}, {"c": "DAUGHTER", "l": "He was drunk."}, {"c": "MOM", "l": "I'm aware of that."}, {"c": "DAUGHTER", "l": "What else was I supposed to do?"}, {"c": "MOM", "l": "That would be one of the questions I had."}, {"c": "DAUGHTER", "l": "I don't want to talk about it."}, {"c": "MOM", "l": "Did I mention you're not grounded?"}, {"c": "DAUGHTER", "l": "Yet."}, {"c": "MOM", "l": "This is the part where you're supposed to be talking."}, {"c": "DAUGHTER", "l": "I don't want to talk about it."}, {"c": "MOM", "l": "Why?"}, {"c": "DAUGHTER", "l": "Why what?"}, {"c": "MOM", "l": "If you tell me why you don't want to talk, maybe I won't press."}, {"c": "DAUGHTER", "l": "Promise."}, {"c": "MOM", "l": "Can't do that."}, {"c": "DAUGHTER", "l": "Figures."}, {"c": "MOM", "l": "I think you'd hate it more if I broke a promise."}, {"c": "DAUGHTER", "l": "This is so unfair."}, {"c": "MOM", "l": "I know, you showing up past curfew, driving up past curfew when you don't have a license, with your drunk boyfriend puking on the lawn. That is a bummer."}, {"c": "DAUGHTER", "l": "No one says bummer."}, {"c": "MOM", "l": "I'm bringing it back."}, {"c": "DAUGHTER", "l": "I don't want to talk about it, because talking about it, makes me think about it. About what happened. And I don't want to. I never want to think about it again. It makes me... The whole thing... everything... Makes me sick."}, {"c": "MOM", "l": "OK. OK."}, {"c": "DAUGHTER", "l": "That's it?"}, {"c": "MOM", "l": "For now. I have... Did he... OK."}, {"c": "DAUGHTER", "l": "Oh. He's not my boyfriend."}, {"c": "MOM", "l": "No?"}, {"c": "DAUGHTER", "l": "Not anymore."}, {"c": "MOM", "l": "Does he know that?"}, {"c": "DAUGHTER", "l": "He'll figure it out. Or maybe he won't, I don't know. I don't care. He said, he promised he was going to take me out for a nice dinner, romantic, just me, not his stupid friends, and where do we end up? And I'm the bitch when I get upset. I'm the one in the wrong when he said... He got mad. He took my phone."}, {"c": "MOM", "l": "And your father wouldn't let me run him over last night."}, {"c": "DAUGHTER", "l": "I knew... Soon as they started drinking I knew all I had to do was wait them out. I thought I might be able to get away, but he... So I did the next best thing. Waited till he fell over and grabbed the keys. I'm not sorry I did it and I'd do it again. Am I grounded?"}, {"c": "MOM", "l": "Are you really done with him?"}, {"c": "DAUGHTER", "l": "Dating sucks."}, {"c": "MOM", "l": "It gets worse. You think football players are bad, wait till you meet lawyers."}, {"c": "DAUGHTER", "l": "Dad's a lawyer."}, {"c": "MOM", "l": "Exactly."}]}, {"id": "josie-and-pete", "title": "Josie & Pete", "author": "Lindsay Price", "cast": "2-Person", "genre": "Comedy", "setting": "School Rooftop", "desc": "Josie and Pete are on the roof of the school for very different reasons.", "characters": ["JOSIE", "PETE"], "emoji": {"JOSIE": "🥪", "PETE": "🥚"}, "lines": [{"c": "JOSIE", "l": "Ah!"}, {"c": "PETE", "l": "AGH!"}, {"c": "JOSIE", "l": "What are you doing?"}, {"c": "PETE", "l": "Don't do that!"}, {"c": "JOSIE", "l": "What are you doing?"}, {"c": "PETE", "l": "You shouldn't sneak up on people on rooftops."}, {"c": "JOSIE", "l": "What are you doing on the roof?"}, {"c": "PETE", "l": "What are you doing on the roof?"}, {"c": "JOSIE", "l": "I asked you first."}, {"c": "PETE", "l": "You're not supposed to be up here."}, {"c": "JOSIE", "l": "And you are?"}, {"c": "PETE", "l": "What are you doing?"}, {"c": "JOSIE", "l": "I am carrying a fairly obvious paper bag, which looks like it holds a fairly obvious lunch. On opening said obvious paper bag it will be revealed that... Yes, indeed. There's lunch in there. Although the jam is boysenberry, which could be seen as an unexpected and way out there choice. That's how I roll. You, on the other hand, are covered in egg cartons."}, {"c": "PETE", "l": "You're the new girl."}, {"c": "JOSIE", "l": "Or Josie. I go by either as far as names go. It must get pretty complicated around here if more than one new girl arrives. Do you alternate?"}, {"c": "PETE", "l": "What's wrong with you?"}, {"c": "JOSIE", "l": "You're asking me what's wrong? Me: Lunch. You: Egg cartons."}, {"c": "PETE", "l": "You do not have a sunny personality."}, {"c": "JOSIE", "l": "I'll take lack of sun over woo woo any day."}, {"c": "PETE", "l": "What is woo woo?"}, {"c": "JOSIE", "l": "Woo woo is what happens when you duct tape egg cartons to your body."}, {"c": "PETE", "l": "Oh. Hey! I am not woo woo."}, {"c": "JOSIE", "l": "You're Pete."}, {"c": "PETE", "l": "I am."}, {"c": "JOSIE", "l": "Hooray. I'm going to eat my lunch."}, {"c": "PETE", "l": "Why are you eating on the roof?"}, {"c": "JOSIE", "l": "It's quiet. Usually. I thought no one else knew about this door being unlocked."}, {"c": "PETE", "l": "Don't you want to eat with other people?"}, {"c": "JOSIE", "l": "Why do you care where I eat?"}, {"c": "PETE", "l": "I asked you first."}, {"c": "JOSIE", "l": "And the gentleman gets a ribbon for 'first question.' Why are you covered in egg cartons?"}, {"c": "PETE", "l": "Why are you answering a question with a question?"}, {"c": "JOSIE", "l": "I don't feel like answering yours."}, {"c": "PETE", "l": "Oh."}, {"c": "JOSIE", "l": "Except... I may have to kill a couple of cats on this one. I kinda want to know what you're doing."}, {"c": "PETE", "l": "You'll think I'm crazy."}, {"c": "JOSIE", "l": "Too late."}, {"c": "PETE", "l": "I am not woo woo!"}, {"c": "JOSIE", "l": "Said the man in the egg carton suit."}, {"c": "PETE", "l": "What'll you do if I don't tell?"}, {"c": "JOSIE", "l": "Run down to the office and say there's a crazy guy on the roof."}, {"c": "PETE", "l": "You can't!"}, {"c": "JOSIE", "l": "Dude you are so woo woo you can't even see it."}, {"c": "PETE", "l": "My entire future is riding on these next few moments and if you stop me, you'll be totally responsible for ruining my life."}, {"c": "JOSIE", "l": "This would be the part where you tell me whyyyyyyyyyy."}, {"c": "PETE", "l": "Fine. I applied to my dream school to get my dream job and I got accepted."}, {"c": "JOSIE", "l": "Which in the non-egg carton world would be cause for celebration."}, {"c": "PETE", "l": "They were supposed to turn me down! I only applied because I was sure they'd reject me. They weren't supposed to say yes."}, {"c": "JOSIE", "l": "Why?"}, {"c": "PETE", "l": "Because now I have to go. I can't turn down my dream school and my dream job. That's crazy!"}, {"c": "JOSIE", "l": "Among other things."}, {"c": "PETE", "l": "I got accepted into the computer animation program at Chapman. With the possibility of a Pixar internship."}, {"c": "JOSIE", "l": "That's big."}, {"c": "PETE", "l": "I know. I have to go."}, {"c": "JOSIE", "l": "So go."}, {"c": "PETE", "l": "I can't."}, {"c": "JOSIE", "l": "Why not?"}, {"c": "PETE", "l": "What if I fail? What if I think I'm good and they think I'm good but really I'm no good? What if I crash and burn?"}, {"c": "JOSIE", "l": "So don't go."}, {"c": "PETE", "l": "Are you out of your mind? I can't stay here. I really, really, really, want my life to be about there."}, {"c": "JOSIE", "l": "So go."}, {"c": "PETE", "l": "I can't!"}, {"c": "JOSIE", "l": "No kidding."}, {"c": "PETE", "l": "The mailman at Chapman is not going to say hi. The mailman at Chapman is not going to know my birthday."}, {"c": "JOSIE", "l": "Or mail woman..."}, {"c": "PETE", "l": "You're making fun of me."}, {"c": "JOSIE", "l": "Oh absolutely. So, you can't go. You can't stay. And you've decided to end it all in an egg carton swan dive?"}, {"c": "PETE", "l": "No!"}, {"c": "JOSIE", "l": "Sorry, sorry..."}, {"c": "PETE", "l": "That's a terrible thing to say."}, {"c": "JOSIE", "l": "I jumped ahead in the story. Please, continue."}, {"c": "PETE", "l": "So, I have some other things I'm afraid of."}, {"c": "JOSIE", "l": "Naturally."}, {"c": "PETE", "l": "And I thought if I could conquer those fears, then something like 'going away to school' will seem trite and tiny and wee."}, {"c": "JOSIE", "l": "Right. And what are the fears that have lead you to being covered in egg cartons?"}, {"c": "PETE", "l": "Heights and falling."}, {"c": "JOSIE", "l": "What?"}, {"c": "PETE", "l": "It's not woo woo."}, {"c": "JOSIE", "l": "Jumping off the roof of the school is the definition of woo woo!"}, {"c": "PETE", "l": "Fall off. I'm going to fall off. Big difference."}, {"c": "JOSIE", "l": "And how are egg cartons going to save you from at the very least enduring severe physical damage?"}, {"c": "PETE", "l": "It's not just egg cartons. I'm going to fill them with shaving cream."}, {"c": "JOSIE", "l": "Of course you are."}, {"c": "PETE", "l": "It has to work. This is my time, I can feel it. I'm ready to take the next step."}, {"c": "JOSIE", "l": "Pete, you can't think this is a good idea."}, {"c": "PETE", "l": "It sounded like a good idea."}, {"c": "JOSIE", "l": "Egg cartons. Shaving cream. Cardboard boxes and a couple of gym mats?"}, {"c": "PETE", "l": "That makes it sound like less than a good idea."}, {"c": "JOSIE", "l": "There's got to be another way to kick your butt out of this town. I'll even volunteer. I'll come to your house, drag you out of bed and kick your butt all the way to Chapman."}, {"c": "PETE", "l": "You don't even know me."}, {"c": "JOSIE", "l": "You don't know me either. We're even."}, {"c": "PETE", "l": "Do you really hate being called the new girl?"}, {"c": "JOSIE", "l": "It's better than 'Parents Gone to Jail Girl.' At least I can have fun with it."}, {"c": "PETE", "l": "Did your parents really do something bad?"}, {"c": "JOSIE", "l": "Yes. They duct taped yogurt containers to their body and fell off the Brooklyn Bridge."}, {"c": "PETE", "l": "They did? Hey..."}, {"c": "JOSIE", "l": "Couldn't resist."}, {"c": "PETE", "l": "I won't call you the new girl ever again. Josie."}, {"c": "JOSIE", "l": "I won't call you woo woo. Unless you do this falling thing. Then I won't have a choice."}]}, {"id": "juliet-ophelia", "title": "Juliet & Ophelia", "author": "Lindsay Price", "cast": "2-Person", "genre": "Comedy", "setting": "Afterworld Waiting Room", "desc": "Life in the afterworld sucks for Juliet and Ophelia. And they're not afraid to tell you about it.", "characters": ["JULIET", "OPHELIA"], "emoji": {"JULIET": "🗡️", "OPHELIA": "🌊"}, "lines": [{"c": "JULIET", "l": "Hey."}, {"c": "OPHELIA", "l": "Hello."}, {"c": "JULIET", "l": "Are you ok?"}, {"c": "OPHELIA", "l": "Sorry. Sorry, I'm not – I don't like this."}, {"c": "JULIET", "l": "This... chair?"}, {"c": "OPHELIA", "l": "Dr. Jodi."}, {"c": "JULIET", "l": "Gotcha. She's very annoying."}, {"c": "OPHELIA", "l": "You don't like her?"}, {"c": "JULIET", "l": "Since the very beginning."}, {"c": "OPHELIA", "l": "I thought everybody around here liked her."}, {"c": "JULIET", "l": "You'd think she's cured cancer the way they talk about her in the commissary."}, {"c": "OPHELIA", "l": "I know. She's the best. She's so helpful."}, {"c": "JULIET", "l": "She got me to open right up. Opened right up like a flower."}, {"c": "OPHELIA", "l": "I hate that one. That one and – We haven't met. Have we? No."}, {"c": "JULIET", "l": "Not officially. I've seen you around."}, {"c": "OPHELIA", "l": "We're always around."}, {"c": "JULIET", "l": "We don't have very many places to go."}, {"c": "OPHELIA", "l": "I can't believe we haven't met. Officially."}, {"c": "JULIET", "l": "I don't really socialize."}, {"c": "OPHELIA", "l": "Right. Me either. Sorry – I'm Ophelia."}, {"c": "JULIET", "l": "Juliet. Juliet Capulet."}, {"c": "OPHELIA", "l": "Nice to meet you."}, {"c": "JULIET", "l": "Officially."}, {"c": "OPHELIA", "l": "Right. So. Did you..."}, {"c": "JULIET", "l": "Oh yes."}, {"c": "OPHELIA", "l": "Me too."}, {"c": "JULIET", "l": "Really?"}, {"c": "OPHELIA", "l": "Really. That's how we got the golden ticket to Loserville."}, {"c": "OPHELIA", "l": "Drowned myself."}, {"c": "JULIET", "l": "Knife in the stomach."}, {"c": "OPHELIA", "l": "Ow. Really?"}, {"c": "JULIET", "l": "Yeah. It seems so stupid now."}, {"c": "OPHELIA", "l": "Tell me about it. I went mad beforehand. One second I was in the east hall, the next I'm underwater. Surprise!"}, {"c": "JULIET", "l": "You're not mad now."}, {"c": "OPHELIA", "l": "No, no. I see everything clear as a bell. Sorry. Dr. Jodi says I have anger issues."}, {"c": "JULIET", "l": "Me too. Anger management program."}, {"c": "JULIET", "l": "Being dead makes me angry."}, {"c": "OPHELIA", "l": "I hate being dead!"}, {"c": "JULIET", "l": "It sucks."}, {"c": "OPHELIA", "l": "It really sucks being dead."}, {"c": "JULIET", "l": "Dr. Jodi wouldn't like that kind of talk."}, {"c": "OPHELIA", "l": "Sometimes, I want to shove her glasses up her nose."}, {"c": "JULIET", "l": "Sometimes, I want to shove that bobble head up her nose. The one on her desk?"}, {"c": "OPHELIA", "l": "She changes them, have you noticed?"}, {"c": "JULIET", "l": "It's the mood of the day. The mood of the day bobble head."}, {"c": "OPHELIA", "l": "Guess my mood Dr. Jodi!"}, {"c": "JULIET", "l": "Up yours Dr. Jodi!"}, {"c": "OPHELIA", "l": "Up yours!"}, {"c": "JULIET", "l": "Stupid Romeo!"}, {"c": "OPHELIA", "l": "Stupid Hamlet!"}, {"c": "JULIET", "l": "Did you go mad over a guy?"}, {"c": "OPHELIA", "l": "I got a two-fer. There was a guy AND I was being manipulated by my dad."}, {"c": "JULIET", "l": "My dad said I had to marry a guy I totally didn't want to marry and when I said I wouldn't, he freaked out!"}, {"c": "OPHELIA", "l": "My guy told me to get lost, my dad died, and next thing I know..."}, {"c": "JULIET", "l": "A guy. A guy I knew for one day."}, {"c": "OPHELIA", "l": "Where's he?"}, {"c": "JULIET", "l": "Dead."}, {"c": "OPHELIA", "l": "Did he..."}, {"c": "JULIET", "l": "Oh yeah. Poison. Over me. Supposedly he loved me SO much he couldn't live without me."}, {"c": "OPHELIA", "l": "So he's here?"}, {"c": "JULIET", "l": "Oh no. He moved on."}, {"c": "OPHELIA", "l": "He left you behind?"}, {"c": "JULIET", "l": "Oh yeah. Eons ago. How's that for true love?"}, {"c": "OPHELIA", "l": "No wonder you're pissed."}, {"c": "JULIET", "l": "Romeo picks his nose!"}, {"c": "OPHELIA", "l": "Hamlet farts and walks away!"}, {"c": "JULIET", "l": "Romeo wears socks and sandals!"}, {"c": "OPHELIA", "l": "Why would I want to move on? I'd just have to be happy about seeing all the people who jerked me around in my life."}, {"c": "JULIET", "l": "Do I really want to be happy about seeing Romeo with another girl?"}, {"c": "OPHELIA", "l": "It's really not that bad here. No one bosses you around. If I want to eat ice cream at two in the morning I can."}, {"c": "JULIET", "l": "No parents telling you to marry some dope who has hairy monkey breath."}, {"c": "OPHELIA", "l": "Exactly! Why would I want to move on? Come on!"}, {"c": "JULIET", "l": "Where are we going?"}, {"c": "OPHELIA", "l": "To yell at Dr. Jodi! We're going to stay angry for the rest of eternity."}, {"c": "JULIET", "l": "The commissary has chocolate mint ice cream."}, {"c": "OPHELIA", "l": "I love chocolate mint! Let's celebrate our anger!"}, {"c": "JULIET", "l": "To anger! Huzzah!"}, {"c": "OPHELIA", "l": "Huzzah!"}]}, {"id": "pretty-girl-plain-girl", "title": "Pretty Girl / Plain Girl", "author": "Lindsay Price", "cast": "2-Person", "genre": "Comedy", "setting": "Rehearsal Room", "desc": "Plain girl wants to compete in a beauty pageant. Pretty girl would rather help a friend.", "characters": ["ONE", "TWO"], "emoji": {"ONE": "🌸", "TWO": "💄"}, "lines": [{"c": "ONE", "l": "Is this the registration desk for the Galaxy Girl Pageant?"}, {"c": "TWO", "l": "What if it is?"}, {"c": "ONE", "l": "I'd like to register."}, {"c": "TWO", "l": "You? You want to be in the pageant?"}, {"c": "ONE", "l": "Yes."}, {"c": "TWO", "l": "You can't register."}, {"c": "ONE", "l": "Why not?"}, {"c": "TWO", "l": "Look at you."}, {"c": "ONE", "l": "What?"}, {"c": "TWO", "l": "Look at the difference between us. I am clearly a ten. You are clearly a two. Ten. Two. Tens enter beauty pageants. Twos don't. Now get out."}, {"c": "TWO", "l": "Jan, are you ok? That was too much. I told you it—"}, {"c": "ONE", "l": "No, I'm fine. I'm fine. I just need to sit down."}, {"c": "TWO", "l": "You can't look crushed like that. A pageant girl sees that look on your face and she'll go in for the kill."}, {"c": "ONE", "l": "They'll really be that mean?"}, {"c": "TWO", "l": "I was just getting started."}, {"c": "ONE", "l": "Oh."}, {"c": "TWO", "l": "See, you're not up for this. Can't you just go to prom? Get a nice dress; I'll do your hair. Isn't that enough?"}, {"c": "ONE", "l": "This is what I want to do."}, {"c": "TWO", "l": "But a beauty pageant? They'll humiliate you!"}, {"c": "ONE", "l": "I can take it. Insult me again."}, {"c": "TWO", "l": "I can't. I can't see that look on your face."}, {"c": "ONE", "l": "Then I'll practice my walk."}, {"c": "TWO", "l": "I don't think you'll ever be ready for pageant girls."}, {"c": "ONE", "l": "You're just trying to scare me. Heel, toe. Heel, toe. You see? I almost have the hang of this."}, {"c": "TWO", "l": "Almost..."}, {"c": "ONE", "l": "I can do this. Thousands of girls enter pageants."}, {"c": "TWO", "l": "Yeah and thousands don't."}, {"c": "ONE", "l": "Don't you have a date tonight?"}, {"c": "TWO", "l": "Huh? Oh, I cancelled."}, {"c": "ONE", "l": "Why?"}, {"c": "TWO", "l": "Because you asked me to help you."}, {"c": "ONE", "l": "Won't Dean get mad?"}, {"c": "TWO", "l": "He better not. He's not that special."}, {"c": "ONE", "l": "Don't you love him?"}, {"c": "TWO", "l": "Oh, sure. Maybe. Maybe not."}, {"c": "ONE", "l": "Tara, you are not normal."}, {"c": "TWO", "l": "Why?"}, {"c": "ONE", "l": "You don't want me to be in a pageant. You cancelled on your boyfriend. You're not supposed to be my friend!"}, {"c": "TWO", "l": "Why?"}, {"c": "ONE", "l": "Pretty people are friends with pretty people."}, {"c": "TWO", "l": "That's ridiculous."}, {"c": "ONE", "l": "Selene doesn't think so. I heard what she said about me. I'm plain. Boring. Not worth hanging out with. You shouldn't hang out with me. That's what she said."}, {"c": "TWO", "l": "She's wrong."}, {"c": "ONE", "l": "Double crap!"}, {"c": "TWO", "l": "Watch out!"}, {"c": "TWO", "l": "Are you all right?"}, {"c": "ONE", "l": "I think the heels won."}, {"c": "TWO", "l": "Take those stupid things off."}, {"c": "ONE", "l": "I think I did some damage."}, {"c": "TWO", "l": "I hate to disappoint you, but I don't do what Selene tells me."}, {"c": "ONE", "l": "But what if she stops being your friend?"}, {"c": "TWO", "l": "Then she wasn't worth it to begin with."}, {"c": "ONE", "l": "Don't you read magazines? You're not supposed to think for yourself. You are totally abnormal."}, {"c": "TWO", "l": "So what are you saying? If you were pretty and I was plain, you'd dump me as a friend?"}, {"c": "ONE", "l": "No. I don't know."}, {"c": "TWO", "l": "You really did a number on this."}, {"c": "ONE", "l": "How am I going to compete in the pageant?"}, {"c": "TWO", "l": "You don't have to! I don't care what you look like. I don't care what Selene says you look like."}, {"c": "ONE", "l": "I care."}, {"c": "TWO", "l": "You'll wear flats."}, {"c": "ONE", "l": "Everyone else will be in heels."}, {"c": "TWO", "l": "There are these flats in Stanbrooks. I saw them last week. Pointy toe, thin, sort of pink, sort of mauve; very pretty. They'll look great and you'll be able to walk. We can go tomorrow."}, {"c": "ONE", "l": "What about Dean?"}, {"c": "TWO", "l": "They won't fit, but they'd probably look pretty on him too."}, {"c": "ONE", "l": "Jerk."}, {"c": "TWO", "l": "Doofus."}, {"c": "ONE", "l": "Ok. Flats it is."}]}, {"id": "remember-the-burrito", "title": "Remember the Burrito", "author": "Lindsay Price", "cast": "2-Person", "genre": "Comedy", "setting": "Outdoors · First Day of Winter", "desc": "Two friends wait for the first snowflake to make a wish. One of them might also want a date to prom.", "characters": ["RAMONA", "JENNY"], "emoji": {"RAMONA": "❄️", "JENNY": "🌯"}, "lines": [{"c": "RAMONA", "l": "Tongue out. Tongue in. Tongue out. Tongue in. Tongue out."}, {"c": "JENNY", "l": "This is stupid."}, {"c": "RAMONA", "l": "No talking! Ok. Shake it out."}, {"c": "JENNY", "l": "Ramona..."}, {"c": "RAMONA", "l": "No talking! Now, we scan the skies."}, {"c": "JENNY", "l": "Ramona."}, {"c": "RAMONA", "l": "If you're talking, you'll miss it and everything will be ruined."}, {"c": "JENNY", "l": "You're exaggerating."}, {"c": "RAMONA", "l": "Don't look at me. Look up."}, {"c": "JENNY", "l": "But—"}, {"c": "RAMONA", "l": "Up, up, up!"}, {"c": "JENNY", "l": "Ok."}, {"c": "JENNY", "l": "Ramona. We're sixteen. We're not kids. Drew didn't come today. Or Natalie. Or Madoka. Or Lynn. I could have had a date today Mona. Sam Stevens asked me to go to the movies and I really wanted to go. Ramona look at me!"}, {"c": "RAMONA", "l": "Remember the burrito."}, {"c": "JENNY", "l": "I know. I know. I know about the burrito. We're not kids anymore."}, {"c": "RAMONA", "l": "We were though. We were seven years old. It was the first day of winter."}, {"c": "JENNY", "l": "Ramona, I know the story. I was there."}, {"c": "RAMONA", "l": "Eyes up! I am telling the tale. It was the first day of winter. We were seven years old."}, {"c": "JENNY", "l": "It was Natalie's birthday sleepover party."}, {"c": "RAMONA", "l": "And we ran outside to catch the first snowflake of the first snowfall on the first day of winter."}, {"c": "JENNY", "l": "And when you catch the first snowflake of the first snowfall, on the first day of winter..."}, {"c": "RAMONA", "l": "...any wish you make will come true."}, {"c": "JENNY", "l": "And we stood in Natalie's backyard."}, {"c": "RAMONA", "l": "Ramona, Jenny, Drew, Madoka, Lynn, and Natalie."}, {"c": "JENNY", "l": "Best friends till the end."}, {"c": "RAMONA", "l": "Our heads thrown back, our arms open wide, tongues out."}, {"c": "JENNY", "l": "And we all made the same wish on the first snowflake."}, {"c": "RAMONA", "l": "And what did we wish for?"}, {"c": "JENNY", "l": "Burritos."}, {"c": "RAMONA", "l": "And what did we have for dinner?"}, {"c": "JENNY", "l": "Burritos."}, {"c": "RAMONA", "l": "And did we know we were having burritos?"}, {"c": "JENNY", "l": "It could have been a coincidence, it—"}, {"c": "RAMONA", "l": "And did we know we were having burritos?"}, {"c": "JENNY", "l": "No."}, {"c": "RAMONA", "l": "Non believers!!! All of you! We caught the first snowflake and that wish came true and we wished for burritos! We could have had money, fame, guys, health, happiness!"}, {"c": "JENNY", "l": "Did you just add guys to the list?"}, {"c": "RAMONA", "l": "I know it wasn't a burrito coincidence. It was worlds colliding to create a magical wish euphoria!"}, {"c": "JENNY", "l": "Do you want a boyfriend, Ramona?"}, {"c": "RAMONA", "l": "What?"}, {"c": "JENNY", "l": "Well, I've been hearing this first snowflake wish euphoria speech for years now: money, fame, health, happiness, and now... guys?"}, {"c": "RAMONA", "l": "So? Maybe I'm changing things up."}, {"c": "JENNY", "l": "Ramona St. Pierre."}, {"c": "RAMONA", "l": "Oh shut up."}, {"c": "JENNY", "l": "You're looking for a date."}, {"c": "RAMONA", "l": "What? So. So what? I was looking at prom dresses."}, {"c": "JENNY", "l": "Ramona St. Pierre!"}, {"c": "RAMONA", "l": "Shut up!"}, {"c": "JENNY", "l": "You're a girl! You want to go to prom!"}, {"c": "RAMONA", "l": "Don't be ridiculous."}, {"c": "JENNY", "l": "This is a happy day."}, {"c": "RAMONA", "l": "I'm not talking about this anymore."}, {"c": "JENNY", "l": "Do you know what colour?"}, {"c": "RAMONA", "l": "No talking!"}, {"c": "JENNY", "l": "I think Taylor Levine likes you."}, {"c": "RAMONA", "l": "Remember the burrito or go away."}, {"c": "JENNY", "l": "I'm not going anywhere. Burrito forever! Viva Burrito!"}, {"c": "RAMONA", "l": "Well. That's excessive."}, {"c": "RAMONA", "l": "Silver satin empire with a beaded bodice and a bow on the back. If you're asking. And Taylor Levine is very cute."}, {"c": "JENNY", "l": "I didn't say anything."}, {"c": "RAMONA", "l": "Good."}, {"c": "JENNY", "l": "Silver would look good on you."}, {"c": "RAMONA", "l": "I thought you weren't saying anything."}, {"c": "JENNY", "l": "I can talk to Taylor in English if you want. Ramona, look!"}, {"c": "RAMONA", "l": "No talking!"}, {"c": "JENNY", "l": "Look at the sky. At the clouds. That's a snow sky."}, {"c": "RAMONA", "l": "What?"}, {"c": "JENNY", "l": "The first snowflake of the first snowfall on the first day of winter. This is it!"}, {"c": "RAMONA", "l": "Holy Cow."}, {"c": "JENNY", "l": "I'm wishing for you Ramona."}, {"c": "RAMONA", "l": "I need all the help I can get. Head back. Tongue out."}]}, {"id": "the-big-lie", "title": "The Big Lie", "author": "Lindsay Price", "cast": "2-Person", "genre": "Comedy", "setting": "Classroom", "desc": "The typical teacher-student interaction gets turned upside-down when a student arrives early.", "characters": ["ONE", "TWO"], "emoji": {"ONE": "📚", "TWO": "🎒"}, "lines": [{"c": "ONE", "l": "Mr. Montgomery."}, {"c": "TWO", "l": "Yes?"}, {"c": "ONE", "l": "Are you trying to sneak into my classroom?"}, {"c": "TWO", "l": "No."}, {"c": "ONE", "l": "It looks to me like you are."}, {"c": "TWO", "l": "Does it?"}, {"c": "ONE", "l": "Indubitably. Are you going to sit?"}, {"c": "TWO", "l": "Can I?"}, {"c": "ONE", "l": "Of course. Who am I to deny the youth of today a seat? What kind of cruel person would I be if I made you squat for the Whole. Entire. Class?"}, {"c": "TWO", "l": "Is that a yes?"}, {"c": "ONE", "l": "Sit."}, {"c": "ONE", "l": "What time is it, Mr. Montgomery?"}, {"c": "TWO", "l": "I don't know."}, {"c": "ONE", "l": "Well, look at the clock. We're very lucky here to have been provided with timepieces in every classroom. It's the wave of the future. The time, please?"}, {"c": "TWO", "l": "Ten o'clock."}, {"c": "ONE", "l": "Look closer, please. What time is it?"}, {"c": "TWO", "l": "Ten-oh-two."}, {"c": "ONE", "l": "Ten-oh-two. Very precise. Thank you. And what makes you think you can waltz into MY class at Ten-oh-Two?"}, {"c": "TWO", "l": "I just wanted—"}, {"c": "ONE", "l": "You wanted? You wanted something? Someone call the presses! A teenager wanted something. That's certainly never happened before."}, {"c": "TWO", "l": "Mrs. Nelson, if you'd just let me—"}, {"c": "ONE", "l": "What time does class start?"}, {"c": "TWO", "l": "Ten fifteen."}, {"c": "ONE", "l": "What was that?"}, {"c": "TWO", "l": "Ten fifteen. Class starts at ten fifteen."}, {"c": "ONE", "l": "Precisely. Ten fifteen. Not ten, not ten oh two, but ten fifteen. Why have you come to class early?"}, {"c": "TWO", "l": "It's just that we're studying The Depression and I think it's a really interesting time and I thought I would come early... and ask... you... some... questions."}, {"c": "ONE", "l": "Are you actually saying the reason you came to class early is because you're interested in learning?"}, {"c": "TWO", "l": "I didn't know that was wrong!"}, {"c": "ONE", "l": "Don't be smart with me!"}, {"c": "TWO", "l": "Sorry!"}, {"c": "ONE", "l": "Do you want to give your fellow students a bad name?"}, {"c": "TWO", "l": "No."}, {"c": "ONE", "l": "No one comes to class early, and they certainly don't ask questions. Haven't you seen them? Don't you know how you're supposed to behave?"}, {"c": "TWO", "l": "I guess not."}, {"c": "ONE", "l": "Are you trying to give me a bad name? Make me look like I care about my students?"}, {"c": "TWO", "l": "But you're a good teacher!"}, {"c": "ONE", "l": "What did you say?"}, {"c": "TWO", "l": "You're a good teacher."}, {"c": "ONE", "l": "Be quiet."}, {"c": "TWO", "l": "You make history fun and exciting—"}, {"c": "ONE", "l": "Don't say that."}, {"c": "TWO", "l": "And I know something else, too—"}, {"c": "ONE", "l": "I can't believe you're doing this, someone will hear."}, {"c": "TWO", "l": "This whole tough guy thing is a sham, an act!"}, {"c": "ONE", "l": "No!"}, {"c": "TWO", "l": "A lie!"}, {"c": "ONE", "l": "It is not!"}, {"c": "TWO", "l": "Liar, liar, pants on fire! You love teaching!"}, {"c": "ONE", "l": "Shut up, shut up!"}, {"c": "TWO", "l": "And you love kids!"}, {"c": "TWO", "l": "You DO care about your students!"}, {"c": "ONE", "l": "Low blow, Mr. Montgomery. Low blow."}, {"c": "TWO", "l": "Try to deny it. Just try it. I've seen the way you teach. You're the best teacher I've ever had and I don't care who knows it. Mrs. Nelson's a good teacher!"}, {"c": "ONE", "l": "Enough! No more! Well. Mr. Montgomery. Clearly you have me behind the eight ball. What are your terms?"}, {"c": "TWO", "l": "What do you mean?"}, {"c": "ONE", "l": "What's your price? What do I have to do to stop you spreading this vicious, malevolent, gossip about me?"}, {"c": "TWO", "l": "Hmmmmmmmm. You let me come in early, AND ask questions..."}, {"c": "ONE", "l": "Too much, you ask for too much!"}, {"c": "TWO", "l": "AND ask questions, then I won't tell anyone what I know. I'll even throw in a few bad stories 'cause I'm in a good mood."}, {"c": "ONE", "l": "What about nicknames? Can you call me some rotten awful nicknames where lots of students can hear?"}, {"c": "TWO", "l": "All right. But I'm not doing the one about the bad breath. That's just cruel. Deal?"}, {"c": "ONE", "l": "Deal."}]}, {"id": "siblings", "title": "Siblings", "author": "Lindsay Price", "cast": "2-Person", "genre": "Comedy", "setting": "Baseball Game", "desc": "A popular older sibling coaches their homeschooled younger sibling on fitting in at high school.", "characters": ["OLDER", "YOUNGER"], "emoji": {"OLDER": "⭐", "YOUNGER": "🐝"}, "lines": [{"c": "YOUNGER", "l": "I am ready. I have a pen. I have the focus of a laser beam ready to absorb your words of fitting in wisdom. Fire away!"}, {"c": "OLDER", "l": "You're not."}, {"c": "YOUNGER", "l": "What?"}, {"c": "OLDER", "l": "You're not ready."}, {"c": "YOUNGER", "l": "We've hardly started and I'm already sinking? How?"}, {"c": "OLDER", "l": "You look eager to learn."}, {"c": "YOUNGER", "l": "Oh. That's bad?"}, {"c": "OLDER", "l": "Very."}, {"c": "YOUNGER", "l": "But I like learning."}, {"c": "OLDER", "l": "No. You don't."}, {"c": "YOUNGER", "l": "Never admit I like learning. Got it."}, {"c": "OLDER", "l": "Are you going to write everything down?"}, {"c": "YOUNGER", "l": "Of course. I have to figure out how to look like I hate learning, while learning at the same time. What next?"}, {"c": "OLDER", "l": "Stop that! Never lean forward. Never look eager. Never raise your hand in class."}, {"c": "YOUNGER", "l": "But what if I know the answer? Can I raise my hand once a month?"}, {"c": "OLDER", "l": "YOUNGER."}, {"c": "YOUNGER", "l": "Every other month?"}, {"c": "OLDER", "l": "No!"}, {"c": "YOUNGER", "l": "Ok, ok, no answers."}, {"c": "OLDER", "l": "Fitting in means you don't do anything to make you stand out. When you stand out people notice you and it gives them a chance to realize you're a space alien."}, {"c": "OLDER", "l": "What are you looking at?"}, {"c": "YOUNGER", "l": "The wave's going around. Here it comes! Whoo!"}, {"c": "YOUNGER", "l": "The wave is wrong. Let me write that down."}, {"c": "OLDER", "l": "If you don't want to take this seriously—"}, {"c": "YOUNGER", "l": "Wait! Don't give up. I'm ready to learn. I'm not admitting I'm ready to learn, and I will lean back and scowl at you as I learn but I am deadly serious about all this not learning. Is that ok?"}, {"c": "OLDER", "l": "I have no idea. Ok. Start hating mom and dad."}, {"c": "YOUNGER", "l": "What? Why?"}, {"c": "OLDER", "l": "People who like their parents stick out."}, {"c": "YOUNGER", "l": "How come you and mom don't spend more time together?"}, {"c": "OLDER", "l": "What?"}, {"c": "YOUNGER", "l": "You both have such pulchritude. It makes so much more sense that you and mom would get along. Pulchritude. I love words that don't look the way they sound. How could something that has 'ritude' in it mean physical beauty? Sorry... sometimes my brain just goes places."}, {"c": "OLDER", "l": "Well stop it."}, {"c": "YOUNGER", "l": "Would you go shopping with me?"}, {"c": "OLDER", "l": "What? Why?"}, {"c": "YOUNGER", "l": "Please? Tomorrow?"}, {"c": "OLDER", "l": "No!"}, {"c": "YOUNGER", "l": "I was thinking I need a fitting in outfit. If I look like I fit in, then everyone will assume I fit in and before they find out I'm different it'll be too late and I'll have everyone totally in love with me."}, {"c": "OLDER", "l": "That's not how high school works."}, {"c": "YOUNGER", "l": "One hour. Less than an hour. One store. I'll take whatever you throw at me."}, {"c": "OLDER", "l": "But I... Fine. One store."}, {"c": "YOUNGER", "l": "That's great. I feel great about this. This is going to all work out great."}, {"c": "OLDER", "l": "That word you said. That punch word?"}, {"c": "YOUNGER", "l": "Pulchritude."}, {"c": "OLDER", "l": "You think I'm pretty?"}]}, {"id": "ask-out-samantha", "title": "Ask Out Samantha Scheme", "author": "Joseph Arnone", "cast": "3-Person", "genre": "Comedy", "setting": "Saturn Falls Community · Florida", "desc": "Two elderly friends navigate loneliness, rivalry, and a scheme to ask out Samantha.", "characters": ["GENE", "CHARLIE", "SAMANTHA"], "emoji": {"GENE": "🏓", "CHARLIE": "🎱", "SAMANTHA": "☀️"}, "lines": [{"c": "GENE", "l": "Eh, where is he?"}, {"c": "CHARLIE", "l": "He's over here."}, {"c": "GENE", "l": "Over where?"}, {"c": "CHARLIE", "l": "Here! Here!"}, {"c": "GENE", "l": "Oh! There you are. You know, I've been looking all over for you. I was at the ping pong table waiting for you."}, {"c": "CHARLIE", "l": "We were meeting right here."}, {"c": "GENE", "l": "But, you said the ping pong table."}, {"c": "CHARLIE", "l": "First, I said the ping pong table, but then I said the pool table."}, {"c": "GENE", "l": "Oh. I didn't hear you."}, {"c": "CHARLIE", "l": "Fine."}, {"c": "GENE", "l": "Wanna get a round?"}, {"c": "CHARLIE", "l": "I've already played a round and I pulled my vertebrae. I'm out."}, {"c": "GENE", "l": "Why didn't you come and get me first?"}, {"c": "CHARLIE", "l": "Because I was already over here waiting for you."}, {"c": "SAMANTHA", "l": "Nice talking with you, Charlie. Hi, Gene."}, {"c": "GENE", "l": "Oh, hi Samantha."}, {"c": "GENE", "l": "Now it makes sense."}, {"c": "CHARLIE", "l": "What does?"}, {"c": "GENE", "l": "Why you didn't come looking for me."}, {"c": "CHARLIE", "l": "Well, I bumped into Sam, I couldn't just leave her."}, {"c": "GENE", "l": "You both could have looked for me together."}, {"c": "CHARLIE", "l": "Nobody wants to walk around looking for somebody in this heat."}, {"c": "GENE", "l": "If the shoe was on the other foot though, I'd never hear the end of it."}, {"c": "CHARLIE", "l": "Oh, stop it."}, {"c": "SAMANTHA", "l": "I'm sorry, Charlie dear."}, {"c": "CHARLIE", "l": "Yes?"}, {"c": "SAMANTHA", "l": "Thursday is no good."}, {"c": "CHARLIE", "l": "It's not?"}, {"c": "SAMANTHA", "l": "My niece is coming by on Thursday. I completely forgot. Want to do Friday instead?"}, {"c": "CHARLIE", "l": "Friday works for me."}, {"c": "SAMANTHA", "l": "Same time?"}, {"c": "CHARLIE", "l": "You got it."}, {"c": "SAMANTHA", "l": "See you then."}, {"c": "GENE", "l": "Son of a bitch. You set me up."}, {"c": "CHARLIE", "l": "Now wait just a minute, Gene."}, {"c": "GENE", "l": "You bastard. You had me waiting by the ping pong table as a diversion for your ask out Samantha scheme."}, {"c": "CHARLIE", "l": "I was gonna tell you."}, {"c": "GENE", "l": "You know I like her."}, {"c": "CHARLIE", "l": "Yes, but I didn't think she'd go for it, and I didn't want to say anything to you unless she did."}, {"c": "GENE", "l": "Unbelievable. I was planning on asking her out. You knew this!"}, {"c": "CHARLIE", "l": "You snooze you lose. What can I say pal?"}, {"c": "GENE", "l": "I hope you burn for this."}, {"c": "CHARLIE", "l": "Gene... Gene, hold on, would ya?"}, {"c": "GENE", "l": "You're a disgrace."}, {"c": "CHARLIE", "l": "Gene, wait a second."}, {"c": "CHARLIE", "l": "I have no feelings for Samantha, whatsoever, other than friendship."}, {"c": "GENE", "l": "Don't give me that."}, {"c": "CHARLIE", "l": "I'm telling you the truth, pal."}, {"c": "GENE", "l": "Why Sam? Out of all the other widows in this dump, you choose Samantha?"}, {"c": "CHARLIE", "l": "I'm lonely."}, {"c": "GENE", "l": "What?"}, {"c": "CHARLIE", "l": "...It's been getting worse, this perplexing feeling of some kind. Can't place my finger on it, but almost feels like I've been falling, like, something terrible is approaching and when I get in that way, I look to the sides of me, and there's no one. I wasn't trying to overstep you. Besides, you're the only friend I have around here anyway, so..."}, {"c": "GENE", "l": "Well, how the hell do you think I feel?"}, {"c": "CHARLIE", "l": "I know."}, {"c": "GENE", "l": "Except, I have feelings for Sam."}, {"c": "CHARLIE", "l": "Yes."}, {"c": "GENE", "l": "And can't work up the courage to ask her to spend time with me."}, {"c": "CHARLIE", "l": "Why not?"}, {"c": "GENE", "l": "What if she says no?"}, {"c": "CHARLIE", "l": "Why would she say no to you, Gene?"}, {"c": "GENE", "l": "Why wouldn't she?"}, {"c": "CHARLIE", "l": "Just ask her out. Won't do you no harm."}, {"c": "GENE", "l": "Her saying no is... aww well."}, {"c": "CHARLIE", "l": "I can put in a good word for you."}, {"c": "GENE", "l": "You would do that for me?"}, {"c": "CHARLIE", "l": "What's the harm?"}, {"c": "GENE", "l": "What would you say?"}, {"c": "CHARLIE", "l": "I'll say you always beat me at ping pong."}, {"c": "GENE", "l": "That is true."}, {"c": "CHARLIE", "l": "Don't worry. I'll make you look like a rockstar."}, {"c": "GENE", "l": "Don't oversell me."}, {"c": "CHARLIE", "l": "No?"}, {"c": "GENE", "l": "Keep me simple."}, {"c": "CHARLIE", "l": "So, no rockstar?"}, {"c": "GENE", "l": "Genuine, Charlie. That's all."}, {"c": "CHARLIE", "l": "You got it, pal."}, {"c": "GENE", "l": "Tell her I am interested in—no wait! Ask her what she thinks of me."}, {"c": "CHARLIE", "l": "Are you sure?"}, {"c": "GENE", "l": "Yes. Ask her and see how she responds. No pressure, but put your feelers out. Can you do that?"}, {"c": "CHARLIE", "l": "Okay, Gene."}, {"c": "GENE", "l": "Remember, don't oversell but, don't undersell me, either."}, {"c": "CHARLIE", "l": "I'll do my best."}, {"c": "GENE", "l": "You're a real friend."}, {"c": "CHARLIE", "l": "I need to go lay down cause my back is flaring up."}, {"c": "GENE", "l": "I'll walk with you."}]}, {"id": "my-first-lockdown", "title": "My First Lockdown", "author": "Jason Pizzarello", "cast": "2-Person", "genre": "Dramedy", "setting": "Janitor's Closet · School Lockdown", "desc": "Two students — one claustrophobic, one calm — hide in a janitor's closet during a school lockdown and find an unexpected connection.", "characters": ["GRACE", "TESS"], "emoji": {"GRACE": "😰", "TESS": "🔒"}, "lines": [{"c": "GRACE", "l": "Are you sure this is the safest place to be?"}, {"c": "TESS", "l": "No."}, {"c": "GRACE", "l": "What?! Then why are we in here? Why did you say—?"}, {"c": "TESS", "l": "I never said it was the safest."}, {"c": "GRACE", "l": "Yes you did! There was no way I would have come in here if it wasn't for you. The only reason I rushed out of the bathroom and in here is because everyone was yelling. I hate closets. I hate all small spaces. I'm what-ever-you-call-phobic."}, {"c": "TESS", "l": "You need to be quiet—you're making it unsafe."}, {"c": "GRACE", "l": "I would rather be floating on a tiny raft in the middle of ocean than stuck in a tiny closet. But you said 'let's get in here, quick' like you knew that this was the safest place and so I listened to you. Why? I should have run in the opposite direction."}, {"c": "TESS", "l": "You know what, this would be the safest place…if you weren't in it."}, {"c": "GRACE", "l": "Then maybe I should go. You want me to go, I'll go."}, {"c": "GRACE", "l": "I'm going."}, {"c": "TESS", "l": "Stop alright. Don't be stupid. You're staying. Just shut up for like two seconds."}, {"c": "GRACE", "l": "Have you ever been in a lockdown before?"}, {"c": "TESS", "l": "No. But my dad's a cop and he's shown me a bunch of videos."}, {"c": "GRACE", "l": "Oh my God what did I just touch?"}, {"c": "TESS", "l": "I don't know what did you touch."}, {"c": "GRACE", "l": "I don't know! But it was…wet."}, {"c": "TESS", "l": "Okay."}, {"c": "GRACE", "l": "Disgusting. This is something disgusting and wet in here. Maybe it was a dog, like a wet lost dog that doesn't bark. But it wasn't moving. So why would it be a dog?"}, {"c": "TESS", "l": "It's not a dog."}, {"c": "GRACE", "l": "Yeah, thanks I know. But it's just—"}, {"c": "TESS", "l": "It's probably a mop or something. We're in a closet."}, {"c": "GRACE", "l": "Like a janitor's closet."}, {"c": "TESS", "l": "I don't know."}, {"c": "GRACE", "l": "Do you hear anything?"}, {"c": "TESS", "l": "All I hear is you talking."}, {"c": "GRACE", "l": "Why are you so angry?"}, {"c": "TESS", "l": "I'm not."}, {"c": "GRACE", "l": "You're like always angry. At me especially it seems. Is it something I did? Because I've been thinking, even before you trapped me in this wet death cage, that you have like an attitude with me and maybe it was something I did? But I don't think so because I barely even interact with you except when I have to in class or something. And even then, it's not like we're friendly. I mean I try to be friendly to you but you always seem so angry. So the only thing I could think of is, that it could possibly be is that I got the part of Claire and you didn't. Maybe it's not anger but jealousy. I mean I'm sorry if you feel that way but I didn't cast the play, so maybe it's something you should talk to Mrs. B about if you're like harboring all these feelings or whatever."}, {"c": "TESS", "l": "One: I'm not angry. Two: I didn't even want that part. Three: you realize if you keep monologuing like that you could possibly get us killed."}, {"c": "GRACE", "l": "One: If you're not angry then why do you always look angry? Two: Of course you wanted that part, everyone did. Claire is the lead. Three: Do you really think we might die?"}, {"c": "TESS", "l": "One: This is just my face. Two: Did you ever think that not everyone wants to play the lead? Maybe some people are better in smaller roles. Three: Yeah, I do."}, {"c": "GRACE", "l": "Really?"}, {"c": "TESS", "l": "Yeah."}, {"c": "GRACE", "l": "Oh my God. Oh my God. I'm gonna die in a janitor's closet."}, {"c": "TESS", "l": "Why do you keep moving around like that? Just relax. Ya know, I'm sure everything's gonna be fine."}, {"c": "GRACE", "l": "I should have stayed in the bathroom."}, {"c": "TESS", "l": "No you shouldn't have. That's a really obvious place to hide."}, {"c": "GRACE", "l": "I definitely should have stayed in the bathroom."}, {"c": "TESS", "l": "Will you stop jumping around—you're going to knock something over."}, {"c": "GRACE", "l": "I have to do something."}, {"c": "TESS", "l": "Just breathe—I told you, everything's gonna be—"}, {"c": "GRACE", "l": "No—I really have to pee. Like I really really have to. I was in the stall when the announcement went off and I just stopped and ran out thinking—I don't know— I was afraid. And now that the adrenaline is wearing off, my bladder is waking up like 'hey, remember me Grace, we have unfinished business.'"}, {"c": "TESS", "l": "Shhhhh…"}, {"c": "GRACE", "l": "Maybe I'll try and make it back."}, {"c": "TESS", "l": "No. You can't leave."}, {"c": "GRACE", "l": "Then what should I do??"}, {"c": "TESS", "l": "Hold it."}, {"c": "GRACE", "l": "I can't! That's what I'm telling you! I can't!"}, {"c": "TESS", "l": "Okay, sshhhhh…. Just, um, just…go then."}, {"c": "GRACE", "l": "What? Go where?"}, {"c": "TESS", "l": "Here. Yeah, just go. When you gotta go, ya gotta go. Just go."}, {"c": "GRACE", "l": "Here?"}, {"c": "TESS", "l": "Why not right? Nature calls. This is an emergency situation. We can't leave. Go in the bucket or something."}, {"c": "GRACE", "l": "This is so embarrassing. I'm gonna die in a janitors closet in a puddle of my own pee."}, {"c": "TESS", "l": "It's okay. We're not gonna die."}, {"c": "GRACE", "l": "You don't think so?"}, {"c": "TESS", "l": "No."}, {"c": "GRACE", "l": "Will you pee with me in this closet?"}, {"c": "TESS", "l": "No I will not."}, {"c": "GRACE", "l": "Okay."}, {"c": "TESS", "l": "You can though."}, {"c": "GRACE", "l": "I just did."}, {"c": "TESS", "l": "So you did. Feel better?"}, {"c": "GRACE", "l": "Yeah."}, {"c": "GRACE", "l": "Hey Tess."}, {"c": "TESS", "l": "Yeah?"}, {"c": "GRACE", "l": "I know you don't want to play the lead, and I understand that's not everyone's type or style or whatever, but you would have been a great Claire. You could be the lead, if you wanted. Any day."}, {"c": "TESS", "l": "Okay. Thanks. …Maybe next year."}, {"c": "GRACE", "l": "Yeah, next year. Definitely."}, {"c": "TESS", "l": "Hey Grace."}, {"c": "GRACE", "l": "Yeah?"}, {"c": "TESS", "l": "Hand me the mop."}]}, {"id": "bargain-store-brawl", "title": "Bargain Store Brawl", "author": "Lindsay Price", "cast": "2-Person", "genre": "Comedy", "setting": "A Bargain Sale", "desc": "Two former friends run into each other at the bargain sale where their friendship spectacularly fell apart — over a shirt.", "characters": ["CHLOE", "SELENA"], "emoji": {"CHLOE": "👚", "SELENA": "🛍️"}, "lines": [{"c": "BOTH", "l": "Nah."}, {"c": "BOTH", "l": "Crap!"}, {"c": "CHLOE", "l": "What's she doing here?"}, {"c": "SELENA", "l": "I can't believe she's here!"}, {"c": "BOTH", "l": "Please let her be gone, please let her be gone, please oh please oh please!"}, {"c": "BOTH", "l": "Crap!"}, {"c": "CHLOE", "l": "What's she doing here?"}, {"c": "SELENA", "l": "I can't believe she's here."}, {"c": "CHLOE", "l": "I can't believe she'd show her face."}, {"c": "SELENA", "l": "If I were her I would have died of shame."}, {"c": "CHLOE", "l": "She has some lot of nerve."}, {"c": "SELENA", "l": "Shame!"}, {"c": "CHLOE", "l": "Nerve!"}, {"c": "SELENA", "l": "Died of shame in a fiery car crash!"}, {"c": "CHLOE", "l": "Nervy nerve face!"}, {"c": "CHLOE", "l": "Why isn't she leaving?"}, {"c": "SELENA", "l": "What's the matter with her?"}, {"c": "CHLOE", "l": "What is wrong with her?"}, {"c": "SELENA", "l": "What's she doing?"}, {"c": "BOTH", "l": "Hmmmmm…"}, {"c": "SELENA", "l": "I wonder…"}, {"c": "CHLOE", "l": "Maybe she's…"}, {"c": "SELENA", "l": "Could she be…"}, {"c": "CHLOE", "l": "Maybe she's ready to apologize."}, {"c": "SELENA", "l": "Maybe she IS filled with shame."}, {"c": "CHLOE", "l": "Oh the poor dear."}, {"c": "SELENA", "l": "She should feel guilty."}, {"c": "BOTH", "l": "I deserve an apology."}, {"c": "CHLOE", "l": "Selena."}, {"c": "SELENA", "l": "Chloe."}, {"c": "CHLOE", "l": "How are you?"}, {"c": "SELENA", "l": "Well, thank you. How are you?"}, {"c": "CHLOE", "l": "I can't complain."}, {"c": "SELENA", "l": "Ah…"}, {"c": "CHLOE", "l": "Yes?"}, {"c": "SELENA", "l": "Yes?"}, {"c": "CHLOE", "l": "Did you say something?"}, {"c": "SELENA", "l": "Did you have something to say?"}, {"c": "CHLOE", "l": "No, did you?"}, {"c": "SELENA", "l": "Did you?"}, {"c": "CHLOE", "l": "Are you enjoying the sale?"}, {"c": "SELENA", "l": "Yes. It is an excellent sale. Don't you agree?"}, {"c": "CHLOE", "l": "Yes. I am finding many marked down items."}, {"c": "SELENA", "l": "Really? Many marked down items is a good thing."}, {"c": "CHLOE", "l": "Good things are good."}, {"c": "SELENA", "l": "Many good things. Many things… Many things happen at a sale like this. Many, many things. Good and bad."}, {"c": "CHLOE", "l": "I must agree."}, {"c": "SELENA", "l": "Oh do you?"}, {"c": "CHLOE", "l": "Yes. Many, many things."}, {"c": "SELENA", "l": "I must say… If I were going to say something… I'm… somewhat… surprised to see you. At the sale."}, {"c": "CHLOE", "l": "Oh?"}, {"c": "SELENA", "l": "Considering what happened. Last year. At the sale?"}, {"c": "CHLOE", "l": "Huh. Well, I must say I'm equally surprised at your presence. At the sale. Considering."}, {"c": "SELENA", "l": "Considering what?"}, {"c": "CHLOE", "l": "You know what."}, {"c": "SELENA", "l": "Why would that be, Chloe? I can't think of one single solitary reason why YOU would be surprised to see ME at the sale. I have nothing to be embarrassed about, and NOTHING to apologize for."}, {"c": "CHLOE", "l": "Oh no?"}, {"c": "SELENA", "l": "I did nothing wrong. Unlike SOME people."}, {"c": "CHLOE", "l": "Who SOME people?"}, {"c": "SELENA", "l": "You know who SOME people are."}, {"c": "CHLOE", "l": "I don't know nothing about any SOME people."}, {"c": "SELENA", "l": "Oh yes you do."}, {"c": "CHLOE", "l": "You stole my top!"}, {"c": "SELENA", "l": "I saw it first!"}, {"c": "CHLOE", "l": "I called dibs!"}, {"c": "SELENA", "l": "You stomped on my foot!"}, {"c": "CHLOE", "l": "You broke the pact!"}, {"c": "SELENA", "l": "You attacked me!"}, {"c": "CHLOE", "l": "You deserved it!"}, {"c": "SELENA", "l": "You look horrible in fuchsia!"}, {"c": "CHLOE", "l": "Selena… Selena."}, {"c": "SELENA", "l": "Well. It's true."}, {"c": "CHLOE", "l": "Selena."}, {"c": "SELENA", "l": "It makes your face… funky. Sorry."}, {"c": "CHLOE", "l": "I can't believe you think that."}, {"c": "SELENA", "l": "I'm doing you a favour."}, {"c": "CHLOE", "l": "How?"}, {"c": "SELENA", "l": "I'm trying to spare your feelings."}, {"c": "CHLOE", "l": "You were supposed to be my friend. We were supposed to be friends for life."}, {"c": "SELENA", "l": "Your friend? YOUR friend. You attacked me over a shirt, Chloe!"}, {"c": "CHLOE", "l": "It's the 'Bargain Low Bargain Big Bargain' sale. The most important sale of the whole year. The only event that matters in my whole life!"}, {"c": "SELENA", "l": "A sale? A stupid sale?"}, {"c": "CHLOE", "l": "Don't you belittle the 'Bargain Low Bargain Big Bargain' sale."}, {"c": "SELENA", "l": "It was a stupid top!"}, {"c": "CHLOE", "l": "That top was going to make Jace ask me to the prom!"}, {"c": "SELENA", "l": "He never would have asked you! Top or no top!"}, {"c": "CHLOE", "l": "Selena. I can't believe you said that."}, {"c": "SELENA", "l": "Damn."}, {"c": "SELENA", "l": "It was a stupid top. It was a stupid fight. Don't you think so, Chloe?"}, {"c": "CHLOE", "l": "I– I– I guess so."}, {"c": "SELENA", "l": "Do you really?"}, {"c": "CHLOE", "l": "Do you?"}, {"c": "SELENA", "l": "Do you?"}, {"c": "CHLOE", "l": "It was a stupid fight."}, {"c": "SELENA", "l": "Can we agree on that?"}, {"c": "CHLOE", "l": "I guess."}, {"c": "SELENA", "l": "So if you would just apologize…"}, {"c": "CHLOE", "l": "Why don't you? You go first."}, {"c": "SELENA", "l": "You first."}, {"c": "CHLOE", "l": "We could be friends again. If you apologize."}, {"c": "SELENA", "l": "You go first and I'll be your friend for life."}, {"c": "CHLOE", "l": "You."}, {"c": "SELENA", "l": "You."}, {"c": "CHLOE", "l": "You."}, {"c": "SELENA", "l": "Never!"}, {"c": "CHLOE", "l": "Fine."}, {"c": "SELENA", "l": "Right. I have to go."}, {"c": "CHLOE", "l": "Yes. You should go."}, {"c": "SELENA", "l": "I'll go. Enjoy the sale."}, {"c": "CHLOE", "l": "Thank you."}, {"c": "SELENA", "l": "Chloe?"}, {"c": "CHLOE", "l": "Yes?"}, {"c": "SELENA", "l": "It may rain this afternoon."}, {"c": "CHLOE", "l": "It might."}, {"c": "SELENA", "l": "It might."}, {"c": "CHLOE", "l": "Selena?"}, {"c": "SELENA", "l": "Uh huh?"}, {"c": "CHLOE", "l": "Make sure you cover your hair. If it rains. Your hair frizzes. A bit."}]}, {"id": "devon-and-hamid", "title": "Devon and Hamid", "author": "Samantha Miller", "cast": "2-Person", "genre": "Drama", "setting": "School Hallway", "desc": "Devon is hiding in a corner after lying to impress a girl. His friend Hamid finds him and tries to convince him the real Devon is worth knowing.", "characters": ["HAMID", "DEVON"], "emoji": {"HAMID": "🎮", "DEVON": "🐉"}, "lines": [{"c": "HAMID", "l": "Devon! Devon, WHERE ARE YOU! DEVAAAAAAAAAAAAAAAHNNN—oh there you are."}, {"c": "HAMID", "l": "Hey dude, what are you doing over here! The club meeting is in the library today."}, {"c": "DEVON", "l": "I'm not going."}, {"c": "HAMID", "l": "Why not?"}, {"c": "HAMID", "l": "Is it because you're having an emo moment in your little emo corner?"}, {"c": "DEVON", "l": "Shut up, I'm not having an emo moment."}, {"c": "HAMID", "l": "Then why aren't you coming to the meeting? The Winter Dance is TOMORROW—"}, {"c": "DEVON", "l": "Because! Sade hates me! That's why I'm not going."}, {"c": "HAMID", "l": "Pfft! Sade doesn't hate you. She's the one that told me to come find you! She said that you said that you were coming to the meeting so she said that I should—"}, {"c": "DEVON", "l": "She does hate me. She's just being nice. I'm not going. My mom's coming to pick me up soon."}, {"c": "HAMID", "l": "Dude, why would she hate you? You literally just met her yesterday."}, {"c": "DEVON", "l": "She hates me because I lied to her face. Okay?"}, {"c": "HAMID", "l": "Whoa! Um, not okay! Why would you do that?"}, {"c": "DEVON", "l": "Because I'm a loser, Hamid! And that's what losers do! We do stupid things like lying about playing soccer so that people like Sade will think we're good at life, when really we're just sad and scared all the time! That's why! Are you happy now?"}, {"c": "DEVON", "l": "I wish I could be more like how I am online. You know? I wouldn't pretend to be cool. When I'm playing DragonSoul I feel like I know what I'm doing. I can do whatever I want, go wherever I want, I'm strong, I'm smart, everyone follows my lead. In real life I'm just… a nobody. If Sade knew me as EPIC_KING, she'd like me. But I'm not like that at all."}, {"c": "HAMID", "l": "Well, I know you as both EPIC_KING and as Devon. And, besides the armor and sword, you guys are totally the same."}, {"c": "DEVON", "l": "Yeah, right."}, {"c": "HAMID", "l": "Okay, maybe he's a little taller, too. Listen, I could tell when I introduced you to Sade that you had a crush on her. But I don't think you have to lie or pretend to be cool to get Sade to like you back. I think anybody would like the real version of you. And I think the 'you' online and the 'you' in real life are the same 'you.'"}, {"c": "DEVON", "l": "No way. Not even close."}, {"c": "DEVON", "l": "That's my mom. Two honks means I've got 30 seconds before she drives away. See you online."}, {"c": "HAMID", "l": "Hey! Don't skip out on club meeting tomorrow, okay? We're all gonna have to work together to set up the Winter Dance. The whole team. Sounds like something you'd do as EPIC, doesn't it?"}, {"c": "DEVON", "l": "…Sure. Whatever, I'll be there. Tell Sade I'm sorry about today."}]}, {"id": "cosette-and-catherine", "title": "Cosette and Catherine", "author": "Lindsay Price", "cast": "2-Person", "genre": "Comedy", "setting": "Baseball Game", "desc": "Catherine — high school beauty queen — gives her homeschooled spelling-bee-champion sister Cosette tips on fitting in. It does not go smoothly.", "characters": ["COSETTE", "CATHERINE"], "emoji": {"COSETTE": "🐝", "CATHERINE": "👑"}, "lines": [{"c": "COSETTE", "l": "I am ready. I have a pen. I have the focus of a laser beam ready to absorb your words of fitting in wisdom. Fire away!"}, {"c": "CATHERINE", "l": "You're not."}, {"c": "COSETTE", "l": "What?"}, {"c": "CATHERINE", "l": "You're not ready."}, {"c": "COSETTE", "l": "We've hardly started and I'm already sinking? How?"}, {"c": "CATHERINE", "l": "You look eager to learn."}, {"c": "COSETTE", "l": "Oh. That's bad?"}, {"c": "CATHERINE", "l": "Very."}, {"c": "COSETTE", "l": "But I like learning."}, {"c": "CATHERINE", "l": "No. You don't."}, {"c": "COSETTE", "l": "Never admit I like learning. Got it."}, {"c": "CATHERINE", "l": "Are you going to write everything down?"}, {"c": "COSETTE", "l": "Of course. I have to figure out how to look like I hate learning, while learning at the same time. What next?"}, {"c": "CATHERINE", "l": "Stop that! Never lean forward. Never look eager. Never raise your hand in class."}, {"c": "COSETTE", "l": "But what if I know the answer? Can I raise my hand once a month?"}, {"c": "CATHERINE", "l": "Cosette."}, {"c": "COSETTE", "l": "Every other month?"}, {"c": "CATHERINE", "l": "No!"}, {"c": "COSETTE", "l": "Ok, ok, no answers."}, {"c": "CATHERINE", "l": "Fitting in means you don't do anything to make you stand out. When you stand out people notice you and it gives them a chance to realize you're a space alien."}, {"c": "CATHERINE", "l": "What are you looking at?"}, {"c": "COSETTE", "l": "The wave's going around. Here it comes! Whoo!"}, {"c": "COSETTE", "l": "The wave is wrong. Let me write that down."}, {"c": "CATHERINE", "l": "If you don't want to take this seriously—"}, {"c": "COSETTE", "l": "Wait! Don't give up. I'm ready to learn. I'm not admitting I'm ready to learn, and I will lean back and scowl at you as I learn but I am deadly serious about all this not learning. Is that ok?"}, {"c": "CATHERINE", "l": "I have no idea. Ok. Start hating mom and dad."}, {"c": "COSETTE", "l": "What? Why?"}, {"c": "CATHERINE", "l": "People who like their parents stick out."}, {"c": "COSETTE", "l": "How come you and mom don't spend more time together?"}, {"c": "CATHERINE", "l": "What?"}, {"c": "COSETTE", "l": "You both have such pulchritude. It makes so much more sense that you and mom would get along. Pulchritude. I love words that don't look the way they sound. How could something that has 'ritude' in it mean physical beauty? Sorry… sometimes my brain just goes places."}, {"c": "CATHERINE", "l": "Well stop it."}, {"c": "COSETTE", "l": "Would you go shopping with me?"}, {"c": "CATHERINE", "l": "What? Why?"}, {"c": "COSETTE", "l": "Please? Tomorrow?"}, {"c": "CATHERINE", "l": "No!"}, {"c": "COSETTE", "l": "I was thinking I need a fitting in outfit. If I look like I fit in, then everyone will assume I fit in and before they find out I'm different it'll be too late and I'll have everyone totally in love with me."}, {"c": "CATHERINE", "l": "That's not how high school works."}, {"c": "COSETTE", "l": "One hour. Less than an hour. One store. I'll take whatever you throw at me."}, {"c": "CATHERINE", "l": "But I – Fine. One store."}, {"c": "COSETTE", "l": "That's great. I feel great about this. This is going to all work out great."}, {"c": "CATHERINE", "l": "That word you said. That punch word?"}, {"c": "COSETTE", "l": "Pulchritude."}, {"c": "CATHERINE", "l": "You think I'm pretty?"}]}, {"id": "april-ryan-leo", "title": "April, Ryan & Leo", "author": "Benjamin Connor", "cast": "3-Person", "genre": "Comedy", "setting": "Bus Stop", "desc": "Leo and Ryan discuss philosophy and Ryan's secret crush — then she shows up.", "characters": ["LEO", "RYAN", "APRIL"], "emoji": {"LEO": "📖", "RYAN": "😳", "APRIL": "🥕"}, "lines": [{"c": "LEO", "l": "OK, Descartes concluded that he knew, absolutely, that he existed...and that's all."}, {"c": "RYAN", "l": "Do you think they have gluten-free food at the carnival?"}, {"c": "LEO", "l": "What?"}, {"c": "RYAN", "l": "The carnival. This weekend. Do you think they have gluten-free food?"}, {"c": "LEO", "l": "You're not allergic to gluten!"}, {"c": "RYAN", "l": "Well, no."}, {"c": "LEO", "l": "Oh my Lord, you have a date."}, {"c": "RYAN", "l": "No. No, that's not—I don't."}, {"c": "LEO", "l": "Oh, I could cry! Look at you! They grow up so fast."}, {"c": "RYAN", "l": "I don't have a date."}, {"c": "LEO", "l": "So who is it?"}, {"c": "RYAN", "l": "Forget I asked."}, {"c": "LEO", "l": "Hmmm...nope, not gonna do that."}, {"c": "RYAN", "l": "Leo."}, {"c": "LEO", "l": "Oh, throw me a bone here!"}, {"c": "RYAN", "l": "Please, Leo."}, {"c": "LEO", "l": "Or guy! Love is blind and all."}, {"c": "RYAN", "l": "It's a girl."}, {"c": "LEO", "l": "Oh, sure, he'll rise to that bait."}, {"c": "RYAN", "l": "This conversation is over."}, {"c": "LEO", "l": "I'm gonna find out who your mysterious celiac crush is. I'm like Sherlock Holmes over here. Nothing gets by me."}, {"c": "RYAN", "l": "You are in no way like Sherlock Holmes."}, {"c": "LEO", "l": "I am too! I observe. I reflect. And then I deduce."}, {"c": "RYAN", "l": "Your fly's open."}, {"c": "LEO", "l": "Thank you. Fine, then, back to philosophy."}, {"c": "RYAN", "l": "And I was wishing you'd discuss less."}, {"c": "APRIL", "l": "Hi, boys. Who finished their history project?"}, {"c": "RYAN", "l": "I'm like halfway done. I still have to make a PowerPoint about Julius Caesar and his accomplishments."}, {"c": "APRIL", "l": "What are his accomplishments?"}, {"c": "RYAN", "l": "Maybe less than halfway done."}, {"c": "APRIL", "l": "I don't know anything about my guy, yet, either. Haven't even started."}, {"c": "LEO", "l": "Would it put a damper on this little pity party if I said I'm finished?"}, {"c": "RYAN", "l": "Yes."}, {"c": "APRIL", "l": "Ugh. Lucky."}, {"c": "LEO", "l": "I really can't see how luck has anything to do with it."}, {"c": "APRIL", "l": "You were born with a good work ethic. That's lucky."}, {"c": "LEO", "l": "John Locke would say that you aren't born with any qualities."}, {"c": "RYAN", "l": "And we're off..."}, {"c": "RYAN", "l": "Carrots?"}, {"c": "APRIL", "l": "Mom woke me up late again. Didn't have time for breakfast. So...carrots."}, {"c": "LEO", "l": "Oh, April, I think I have an oatmeal bar in here somewhere. Can't have you living like a rabbit here."}, {"c": "APRIL", "l": "Wish I could, but oatmeal has oats in it."}, {"c": "LEO", "l": "Well, yes."}, {"c": "APRIL", "l": "I'm gluten intolerant."}, {"c": "LEO", "l": "Really? Well, I'll be. I never knew that."}, {"c": "APRIL", "l": "I kinda avoid mentioning it. But I thought you knew, actually."}, {"c": "LEO", "l": "This is interesting! You learn new things every day! Right, Ryan?"}, {"c": "RYAN", "l": "As long as you're alive you do."}, {"c": "APRIL", "l": "You boys alright?"}, {"c": "LEO", "l": "Yep!"}, {"c": "RYAN", "l": "Yep!"}]}];</script>
+<script type="text/babel">
+const {useState,useEffect,useRef,useCallback} = React;
+
+const PALS=[["var(--accent)","#7FBBAB"],["#E07A9A","#7AB8D4"],["#E8A838","#6BA3BE"],["#A3BE8C","#BF616A"],["#88C0D0","#EBCB8B"],["#B48EAD","#A3BE8C"],["#D08770","#81A1C1"],["#5E81AC","#D08770"],["#8FBCBB","#BF616A"],["#EBCB8B","#A3BE8C"]];
+
+function gc(script,char){
+  let idx=SCRIPTS.indexOf(script);
+  if(idx===-1)idx=Math.abs(script.id.split("").reduce((a,c)=>a+c.charCodeAt(0),0));
+  const pal=PALS[idx%PALS.length];
+  if(char==="BOTH"||char==="GIRLS")return"#C9A84C";
+  const ci=script.characters.indexOf(char);
+  return pal[Math.abs(ci)%pal.length]||pal[0];
+}
+
+const THEMES=[
+  {id:"backstage",name:"Backstage",icon:"🎭",desc:"Warm dark with golden accents",type:"dark",
+    gradient:"linear-gradient(160deg,#0c0e12 0%,#141210 40%,#0e0d0c 100%)",
+    body:"#0c0e12",accent:"#D4A054",card:"#0e0d0c",
+    preview:["#0c0e12","#1a1510","#D4A054"],
+    vars:{bg2:"rgba(255,255,255,0.03)",bg3:"rgba(255,255,255,0.04)",bg4:"rgba(255,255,255,0.05)",brd:"rgba(255,255,255,0.06)",brd2:"rgba(255,255,255,0.08)",brd3:"rgba(255,255,255,0.1)",brd4:"rgba(255,255,255,0.12)",t1:"#e8e0d4",t2:"rgba(255,255,255,0.5)",t3:"rgba(255,255,255,0.4)",t4:"rgba(255,255,255,0.35)",t5:"rgba(255,255,255,0.3)",t6:"rgba(255,255,255,0.25)",t7:"rgba(255,255,255,0.2)",t8:"rgba(255,255,255,0.12)",card:"#0e0d0c",modal:"rgba(0,0,0,0.8)",accent:"#D4A054"}},
+  {id:"spotlight",name:"Spotlight",icon:"💡",desc:"Clean cream with warm tones",type:"light",
+    gradient:"linear-gradient(160deg,#f4f0eb 0%,#ede6df 40%,#f0ece7 100%)",
+    body:"#f4f0eb",accent:"#9C6B30",card:"#ffffff",
+    preview:["#f4f0eb","#ede6df","#9C6B30"],
+    vars:{bg2:"rgba(0,0,0,0.025)",bg3:"rgba(0,0,0,0.035)",bg4:"rgba(0,0,0,0.045)",brd:"rgba(0,0,0,0.07)",brd2:"rgba(0,0,0,0.09)",brd3:"rgba(0,0,0,0.12)",brd4:"rgba(0,0,0,0.15)",t1:"#1a1610",t2:"rgba(0,0,0,0.55)",t3:"rgba(0,0,0,0.45)",t4:"rgba(0,0,0,0.4)",t5:"rgba(0,0,0,0.35)",t6:"rgba(0,0,0,0.28)",t7:"rgba(0,0,0,0.2)",t8:"rgba(0,0,0,0.1)",card:"#ffffff",modal:"rgba(0,0,0,0.35)",accent:"#9C6B30"}},
+  {id:"midnight",name:"Midnight",icon:"🌙",desc:"Cool blues with silver accents",type:"dark",
+    gradient:"linear-gradient(160deg,#0a0e18 0%,#0f1524 40%,#0b0f1a 100%)",
+    body:"#0a0e18",accent:"#7EB8DA",card:"#0d1220",
+    preview:["#0a0e18","#0f1524","#7EB8DA"],
+    vars:{bg2:"rgba(130,180,220,0.04)",bg3:"rgba(130,180,220,0.06)",bg4:"rgba(130,180,220,0.08)",brd:"rgba(130,180,220,0.08)",brd2:"rgba(130,180,220,0.12)",brd3:"rgba(130,180,220,0.16)",brd4:"rgba(130,180,220,0.2)",t1:"#c8d8e8",t2:"rgba(200,216,232,0.55)",t3:"rgba(200,216,232,0.45)",t4:"rgba(200,216,232,0.38)",t5:"rgba(200,216,232,0.3)",t6:"rgba(200,216,232,0.22)",t7:"rgba(200,216,232,0.16)",t8:"rgba(200,216,232,0.1)",card:"#0d1220",modal:"rgba(0,0,0,0.85)",accent:"#7EB8DA"}},
+  {id:"curtain",name:"Curtain Call",icon:"🎪",desc:"Deep velvet reds and burgundy",type:"dark",
+    gradient:"linear-gradient(160deg,#140a0c 0%,#1c0f12 40%,#120a0c 100%)",
+    body:"#140a0c",accent:"#D4666E",card:"#160c0e",
+    preview:["#140a0c","#1c0f12","#D4666E"],
+    vars:{bg2:"rgba(212,102,110,0.04)",bg3:"rgba(212,102,110,0.06)",bg4:"rgba(212,102,110,0.08)",brd:"rgba(212,102,110,0.08)",brd2:"rgba(212,102,110,0.12)",brd3:"rgba(212,102,110,0.16)",brd4:"rgba(212,102,110,0.2)",t1:"#e8d4d6",t2:"rgba(232,212,214,0.55)",t3:"rgba(232,212,214,0.45)",t4:"rgba(232,212,214,0.38)",t5:"rgba(232,212,214,0.3)",t6:"rgba(232,212,214,0.22)",t7:"rgba(232,212,214,0.16)",t8:"rgba(232,212,214,0.1)",card:"#160c0e",modal:"rgba(0,0,0,0.85)",accent:"#D4666E"}},
+  {id:"playbill",name:"Playbill",icon:"📰",desc:"High contrast black & white with red",type:"dark",
+    gradient:"linear-gradient(160deg,#0a0a0a 0%,#111111 40%,#0a0a0a 100%)",
+    body:"#0a0a0a",accent:"#E63946",card:"#0f0f0f",
+    preview:["#0a0a0a","#111111","#E63946"],
+    vars:{bg2:"rgba(255,255,255,0.04)",bg3:"rgba(255,255,255,0.06)",bg4:"rgba(255,255,255,0.08)",brd:"rgba(255,255,255,0.08)",brd2:"rgba(255,255,255,0.12)",brd3:"rgba(255,255,255,0.16)",brd4:"rgba(255,255,255,0.2)",t1:"#f0f0f0",t2:"rgba(255,255,255,0.6)",t3:"rgba(255,255,255,0.48)",t4:"rgba(255,255,255,0.4)",t5:"rgba(255,255,255,0.32)",t6:"rgba(255,255,255,0.24)",t7:"rgba(255,255,255,0.18)",t8:"rgba(255,255,255,0.1)",card:"#0f0f0f",modal:"rgba(0,0,0,0.9)",accent:"#E63946"}},
+  {id:"matinee",name:"Matinée",icon:"🌸",desc:"Soft blush and rose pastels",type:"light",
+    gradient:"linear-gradient(160deg,#f9f2f0 0%,#f5eae8 40%,#f7efed 100%)",
+    body:"#f9f2f0",accent:"#C4707A",card:"#ffffff",
+    preview:["#f9f2f0","#f5eae8","#C4707A"],
+    vars:{bg2:"rgba(180,90,100,0.03)",bg3:"rgba(180,90,100,0.05)",bg4:"rgba(180,90,100,0.07)",brd:"rgba(180,90,100,0.08)",brd2:"rgba(180,90,100,0.12)",brd3:"rgba(180,90,100,0.16)",brd4:"rgba(180,90,100,0.2)",t1:"#2a1a1c",t2:"rgba(42,26,28,0.55)",t3:"rgba(42,26,28,0.45)",t4:"rgba(42,26,28,0.38)",t5:"rgba(42,26,28,0.3)",t6:"rgba(42,26,28,0.22)",t7:"rgba(42,26,28,0.16)",t8:"rgba(42,26,28,0.08)",card:"#ffffff",modal:"rgba(0,0,0,0.3)",accent:"#C4707A"}},
+];
+
+function applyTheme(themeId){
+  const t=THEMES.find(x=>x.id===themeId)||THEMES[0];
+  const r=document.documentElement;
+  Object.entries(t.vars).forEach(([k,v])=>r.style.setProperty("--"+k,v));
+  r.style.setProperty("--accent",t.accent);
+  // Compute accent opacity variants from hex
+  const hex=t.accent.replace("#","");
+  const R=parseInt(hex.substring(0,2),16),G=parseInt(hex.substring(2,4),16),B=parseInt(hex.substring(4,6),16);
+  const a=(o)=>`rgba(${R},${G},${B},${o})`;
+  r.style.setProperty("--accent-bg",a(0.08));
+  r.style.setProperty("--accent-bg2",a(0.12));
+  r.style.setProperty("--accent-bg3",a(0.15));
+  r.style.setProperty("--accent-border",a(0.25));
+  r.style.setProperty("--accent-border2",a(0.3));
+  r.style.setProperty("--accent-dim",a(0.45));
+  r.style.setProperty("--accent-med",a(0.6));
+  r.style.setProperty("--accent-bright",a(0.7));
+  r.style.setProperty("--accent-glow",a(0.07));
+  document.body.style.background=t.body;
+  document.body.style.color=t.vars.t1;
+  document.body.className=t.type;
+}
+
+function ThemePicker({current,onSelect,onClose}){
+  return(
+    <div style={{position:"fixed",inset:0,background:"var(--modal)",display:"flex",alignItems:"center",justifyContent:"center",zIndex:1500,padding:20,backdropFilter:"blur(6px)"}} onClick={e=>{if(e.target===e.currentTarget)onClose()}}>
+      <div style={{width:"100%",maxWidth:480,background:"var(--card)",border:"1px solid var(--brd3)",borderRadius:24,overflow:"hidden",boxShadow:"0 24px 80px rgba(0,0,0,0.6)",animation:"fadeUp 0.3s ease"}}>
+        <div style={{padding:"24px 28px 16px",borderBottom:"1px solid var(--brd)"}}>
+          <div style={{fontSize:11,fontWeight:700,letterSpacing:3,textTransform:"uppercase",color:"var(--accent)",opacity:0.6,marginBottom:4}}>Appearance</div>
+          <div style={{display:"flex",justifyContent:"space-between",alignItems:"center"}}>
+            <div style={{fontFamily:"'Playfair Display',serif",fontSize:22,fontWeight:700,color:"var(--t1)"}}>Theme Packs</div>
+            <button onClick={onClose} style={{background:"transparent",border:"1px solid var(--brd3)",borderRadius:20,color:"var(--t3)",fontSize:13,cursor:"pointer",padding:"6px 14px"}}>✕</button>
+          </div>
+        </div>
+        <div style={{padding:"20px 28px 28px",display:"grid",gridTemplateColumns:"repeat(2,1fr)",gap:12}}>
+          {THEMES.map(t=>{
+            const active=current===t.id;
+            return(
+              <button key={t.id} onClick={()=>onSelect(t.id)} style={{
+                textAlign:"left",padding:"16px 18px",
+                background:active?t.accent+"18":"var(--bg3)",
+                border:active?`2px solid ${t.accent}`:"2px solid var(--brd)",
+                borderRadius:16,cursor:"pointer",transition:"all 0.2s ease",
+                transform:active?"scale(1.02)":"scale(1)",
+              }}>
+                <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:10}}>
+                  <span style={{fontSize:22}}>{t.icon}</span>
+                  <div>
+                    <div style={{fontSize:14,fontWeight:700,color:active?t.accent:"var(--t1)"}}>{t.name}</div>
+                    <div style={{fontSize:11,color:"var(--t5)"}}>{t.desc}</div>
+                  </div>
+                </div>
+                <div style={{display:"flex",gap:4,marginTop:4}}>
+                  {t.preview.map((c,i)=><div key={i} style={{flex:1,height:20,borderRadius:6,background:c,border:"1px solid var(--brd2)"}}/>)}
+                  <div style={{width:20,height:20,borderRadius:6,background:t.accent,flexShrink:0}}/>
+                </div>
+                {active&&<div style={{marginTop:8,fontSize:11,fontWeight:700,color:t.accent,letterSpacing:1}}>✓ ACTIVE</div>}
+              </button>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Confetti({accent}){
+  const colors=[accent,"#A3BE8C","#88C0D0","#B48EAD","#EBCB8B","#E07A9A"];
+  const ps=React.useMemo(()=>Array.from({length:30},(_,i)=>({id:i,x:Math.random()*100,c:colors[i%colors.length],delay:Math.random()*0.7,size:4+Math.random()*5,dur:1.4+Math.random()*0.9,rot:Math.random()*360})),[]);
+  return <div style={{position:"fixed",top:0,left:0,width:"100%",height:"100%",pointerEvents:"none",zIndex:999,overflow:"hidden"}}>
+    {ps.map(p=><div key={p.id} style={{position:"absolute",left:`${p.x}%`,top:"-16px",width:p.size,height:p.size*0.55,background:p.c,borderRadius:2,transform:`rotate(${p.rot}deg)`,animation:`confettiFall ${p.dur}s cubic-bezier(0.25,0.46,0.45,0.94) ${p.delay}s forwards`}}/>)}
+  </div>;
+}
+
+function StreakBadge({userName}){
+  const [streak,setStreak]=useState(0);
+  useEffect(()=>{
+    try{
+      const h=JSON.parse(localStorage.getItem("sm_history_"+userName)||"[]");
+      if(!h.length){setStreak(0);return;}
+      const days=new Set(h.map(x=>{const d=new Date(x.date);return d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate();}));
+      const sorted=[...days].sort((a,b)=>new Date(b)-new Date(a));
+      let s=0;
+      const today=new Date();
+      for(let i=0;i<sorted.length;i++){
+        const check=new Date(today);check.setDate(check.getDate()-i);
+        const key=check.getFullYear()+"-"+(check.getMonth()+1)+"-"+check.getDate();
+        if(days.has(key))s++;else break;
+      }
+      setStreak(s);
+    }catch(e){setStreak(0);}
+  },[userName]);
+  if(streak<1)return null;
+  return <div style={{display:"inline-flex",alignItems:"center",gap:6,padding:"6px 16px",background:"var(--accent-bg)",border:"1px solid var(--accent-border)",borderRadius:30,fontSize:13,fontWeight:700,color:"var(--accent)",animation:"fadeIn 0.5s ease"}}>🔥 {streak} day streak</div>;
+}
+
+function ScriptCreator({onClose,onSave}){
+  const [title,setTitle]=useState("");
+  const [author,setAuthor]=useState("");
+  const [genre,setGenre]=useState("");
+  const [text,setText]=useState("");
+  const [preview,setPreview]=useState(null);
+  const [error,setError]=useState("");
+  const [parsing,setParsing]=useState(false);
+  const [parseStage,setParseStage]=useState("");
+
+  const aiParse=async(raw,ttl,auth)=>{
+    const prompt=`You are a script parser. Parse the following script into structured JSON.
+
+Return ONLY a valid JSON object with NO markdown, no explanation, no backticks — just raw JSON.
+
+The JSON must have:
+- "title": string (use "${ttl}" if provided, otherwise infer from script)
+- "author": string (use "${auth}" if provided, otherwise infer or use "Unknown")
+- "genre": string (infer from tone: Comedy, Drama, Dramedy, etc.)
+- "setting": string (infer from context, e.g. "School Hallway" or "Living Room")
+- "desc": string (1-2 sentence description of the scene)
+- "characters": array of character name strings (UPPERCASE, no stage directions)
+- "lines": array of {c: "CHARACTER_NAME", l: "dialogue text"} objects
+
+Rules:
+- Skip stage directions entirely (lines in parentheses or italics)
+- Skip scene headings, page numbers, copyright notices
+- Each line object is one speech by one character
+- If two characters speak simultaneously, use "BOTH" as the character name
+- Character names must be UPPERCASE and consistent throughout
+- Dialogue should be clean — no leading/trailing whitespace
+
+Script to parse:
+${raw}`;
+
+    const resp=await fetch("https://api.anthropic.com/v1/messages",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({
+        model:"claude-sonnet-4-20250514",
+        max_tokens:4000,
+        messages:[{role:"user",content:prompt}]
+      })
+    });
+    const data=await resp.json();
+    const rawText=data.content.map(b=>b.text||"").join("");
+    // Strip any accidental markdown fences
+    const cleaned=rawText.replace(/```json|```/g,"").trim();
+    return JSON.parse(cleaned);
+  };
+
+  const handlePreview=async()=>{
+    setError("");
+    if(!title.trim()){setError("Add a title first");return;}
+    if(!text.trim()){setError("Paste your script");return;}
+    setParsing(true);
+    setParseStage("Reading your script…");
+    try{
+      setParseStage("AI is parsing characters and lines…");
+      const result=await aiParse(text,title,author);
+      setParseStage("Finishing up…");
+      if(!result.lines||result.lines.length<2){setError("AI couldn't find enough dialogue. Check your script format.");setParsing(false);return;}
+      setPreview(result);
+    }catch(e){
+      // Fallback to regex parser if AI fails
+      setParseStage("AI unavailable — using basic parser…");
+      await new Promise(r=>setTimeout(r,600));
+      const lines=text.split("\n").filter(l=>l.trim());
+      const cards=[];const chars=new Set();
+      for(const line of lines){
+        const m=line.match(/^([A-Z][A-Za-z\s.''\-]+?):\s*(.+)/);
+        if(m){const c=m[1].trim(),l=m[2].trim();chars.add(c);cards.push({c,l});}
+        else if(cards.length>0){cards[cards.length-1].l+=" "+line.trim();}
+      }
+      if(cards.length<2){setError("Couldn't find dialogue. Format each line as CHARACTER: dialogue");setParsing(false);return;}
+      setPreview({title:title.trim(),author:author.trim()||"Custom",genre:genre||"Custom",setting:"",desc:"Custom script — "+cards.length+" lines",characters:[...chars],lines:cards});
+    }
+    setParsing(false);setParseStage("");
+  };
+
+  const handleSave=()=>{
+    if(!preview)return;
+    const id="custom-"+Date.now();
+    const s={
+      id,
+      title:preview.title||title.trim(),
+      author:preview.author||author.trim()||"Custom",
+      cast:preview.characters.length+"-Person",
+      genre:preview.genre||genre||"Custom",
+      setting:preview.setting||"",
+      desc:preview.desc||"Custom script — "+preview.lines.length+" lines",
+      characters:preview.characters,
+      emoji:{},
+      lines:preview.lines
+    };
+    onSave(s);
+  };
+
+  const accent="var(--accent)";
+  return(
+    <div style={{position:"fixed",inset:0,background:"var(--modal)",display:"flex",alignItems:"center",justifyContent:"center",zIndex:1500,padding:20,backdropFilter:"blur(6px)"}} onClick={e=>{if(e.target===e.currentTarget)onClose()}}>
+      <div style={{width:"100%",maxWidth:560,maxHeight:"85vh",background:"var(--card)",border:"1px solid var(--accent-border)",borderRadius:24,display:"flex",flexDirection:"column",overflow:"hidden",boxShadow:"0 24px 80px rgba(0,0,0,0.8)",animation:"fadeUp 0.3s ease"}}>
+        <div style={{padding:"24px 28px 16px",borderBottom:"1px solid var(--brd)",flexShrink:0,display:"flex",alignItems:"center",justifyContent:"space-between"}}>
+          <div>
+            <div style={{fontSize:11,fontWeight:700,letterSpacing:3,textTransform:"uppercase",color:"var(--accent-med)",marginBottom:4}}>Add Script</div>
+            <div style={{fontFamily:"'Playfair Display',serif",fontSize:20,fontWeight:700}}>AI Script Parser</div>
+          </div>
+          <button onClick={onClose} style={{background:"transparent",border:"1px solid var(--brd3)",borderRadius:20,color:"var(--t3)",fontSize:13,cursor:"pointer",padding:"6px 14px"}}>✕</button>
+        </div>
+        <div style={{overflowY:"auto",flex:1,padding:"20px 28px 28px"}}>
+          {parsing?(
+            <div style={{textAlign:"center",padding:"48px 0"}}>
+              <div style={{fontSize:40,marginBottom:16,animation:"spin 1.2s linear infinite",display:"inline-block"}}>✦</div>
+              <div style={{fontFamily:"'Playfair Display',serif",fontSize:18,fontWeight:700,marginBottom:8}}>Parsing Script</div>
+              <div style={{fontSize:14,color:"var(--t4)",animation:"fadeIn 0.4s ease"}}>{parseStage}</div>
+            </div>
+          ):!preview?(
+            <>
+              <div style={{display:"flex",gap:10,marginBottom:10}}>
+                <input value={title} onChange={e=>setTitle(e.target.value)} placeholder="Script title *" style={{flex:1,padding:"12px 16px",background:"var(--bg3)",border:"1px solid var(--brd3)",borderRadius:12,color:"var(--t1)",fontSize:14,outline:"none",fontFamily:"inherit"}}/>
+                <input value={author} onChange={e=>setAuthor(e.target.value)} placeholder="Author (optional)" style={{flex:1,padding:"12px 16px",background:"var(--bg3)",border:"1px solid var(--brd3)",borderRadius:12,color:"var(--t1)",fontSize:14,outline:"none",fontFamily:"inherit"}}/>
+              </div>
+              <div style={{fontSize:13,color:"var(--t4)",marginBottom:8,lineHeight:1.6}}>
+                ✦ AI will automatically detect characters, clean up stage directions, and fill in genre and setting. Just paste any script format below.
+              </div>
+              <textarea value={text} onChange={e=>setText(e.target.value)} placeholder={"Paste any script format — standard, PDF copy-paste, whatever you have:\n\nROMEO: But soft, what light through yonder window breaks?\n\nJULIET\nO Romeo, Romeo! Wherefore art thou Romeo?\n\n(Stage direction in parens will be ignored)"} rows={13} style={{width:"100%",padding:"14px 16px",background:"var(--bg2)",border:"1px solid var(--brd2)",borderRadius:14,color:"var(--t1)",fontSize:13,fontFamily:"inherit",resize:"vertical",outline:"none",lineHeight:1.7,boxSizing:"border-box"}}/>
+              {error&&<div style={{marginTop:10,fontSize:13,color:"#BF616A"}}>{error}</div>}
+              <div style={{display:"flex",justifyContent:"flex-end",marginTop:16}}>
+                <button onClick={handlePreview} className="btn-press" style={{padding:"12px 32px",background:`linear-gradient(135deg,${accent},${accent}cc)`,border:"none",borderRadius:40,color:"#1a1a1a",fontSize:14,fontWeight:700,cursor:"pointer"}}>✦ Parse with AI</button>
+              </div>
+            </>
+          ):(
+            <>
+              <div style={{background:"rgba(163,190,140,0.08)",border:"1px solid rgba(163,190,140,0.2)",borderRadius:12,padding:"12px 16px",marginBottom:16,fontSize:13,color:"#A3BE8C"}}>
+                ✓ AI found <strong>{preview.lines.length}</strong> lines across <strong>{preview.characters.length}</strong> characters
+                {preview.genre&&preview.genre!=="Custom"&&<> · <span style={{color:"var(--t3)"}}>{preview.genre}</span></>}
+                {preview.setting&&<> · <span style={{color:"var(--t3)"}}>{preview.setting}</span></>}
+              </div>
+              {preview.desc&&<div style={{fontSize:13,color:"var(--t3)",fontStyle:"italic",marginBottom:14,lineHeight:1.6}}>{preview.desc}</div>}
+              <div style={{display:"flex",gap:8,flexWrap:"wrap",marginBottom:16}}>
+                {preview.characters.map(c=><span key={c} style={{padding:"4px 14px",borderRadius:20,background:"var(--accent-bg2)",color:"var(--accent)",fontSize:13,fontWeight:600}}>{c} · {preview.lines.filter(x=>x.c===c).length}</span>)}
+              </div>
+              <div style={{maxHeight:200,overflowY:"auto",background:"var(--bg2)",borderRadius:12,padding:14,marginBottom:16}}>
+                {preview.lines.slice(0,10).map((c,i)=><div key={i} style={{fontSize:13,color:"var(--t2)",marginBottom:6,lineHeight:1.5}}><span style={{color:"var(--accent)",fontWeight:600}}>{c.c}:</span> {c.l}</div>)}
+                {preview.lines.length>10&&<div style={{fontSize:12,color:"var(--t6)",marginTop:8}}>…and {preview.lines.length-10} more lines</div>}
+              </div>
+              <div style={{display:"flex",gap:10,justifyContent:"flex-end"}}>
+                <button onClick={()=>setPreview(null)} className="btn-press" style={{padding:"11px 24px",background:"var(--bg3)",border:"1px solid var(--brd2)",borderRadius:40,color:"var(--t2)",fontSize:14,cursor:"pointer"}}>← Re-parse</button>
+                <button onClick={handleSave} className="btn-press" style={{padding:"11px 32px",background:`linear-gradient(135deg,${accent},${accent}cc)`,border:"none",borderRadius:40,color:"#1a1a1a",fontSize:14,fontWeight:700,cursor:"pointer"}}>Add Script ✓</button>
+              </div>
+            </>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+
+function Landing({onSelect,onAddScript,customScripts}){
+  const allScripts=[...SCRIPTS,...(customScripts||[])];
+  const groups=[
+    ...(customScripts&&customScripts.length>0?[{title:"Your Scripts",items:customScripts}]:[]),
+    {title:"2-Person Scenes",items:SCRIPTS.filter(s=>s.cast.startsWith("2"))},
+    {title:"3-Person Scenes",items:SCRIPTS.filter(s=>s.cast.startsWith("3"))},
+    {title:"Group Scenes",items:SCRIPTS.filter(s=>s.cast.startsWith("5"))},
+  ].filter(g=>g.items.length>0);
+
+  return(
+    <div style={{animation:"fadeIn 0.5s ease"}}>
+      <div style={{display:"flex",justifyContent:"flex-end",marginBottom:20}}>
+        <button onClick={onAddScript} className="btn-press" style={{padding:"10px 20px",background:"var(--accent-bg)",border:"1px solid var(--accent-border)",borderRadius:30,color:"var(--accent)",fontSize:13,fontWeight:700,cursor:"pointer",transition:"all 0.2s"}}
+          onMouseOver={e=>{e.currentTarget.style.background="var(--accent-bg3)"}}
+          onMouseOut={e=>{e.currentTarget.style.background="var(--accent-bg)"}}>
+          + Add Script
+        </button>
+      </div>
+      {groups.map(g=>(
+        <div key={g.title} style={{marginBottom:52}}>
+          <h2 style={{fontFamily:"'DM Sans',sans-serif",fontSize:11,fontWeight:700,letterSpacing:3,textTransform:"uppercase",marginBottom:16,color:"var(--t5)"}}>{g.title}</h2>
+          <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(260px,1fr))",gap:14}}>
+            {g.items.map((s,si)=>{
+              const roles=s.characters.filter(c=>c!=="BOTH"&&c!=="GIRLS");
+              return(
+                <button key={s.id} onClick={()=>onSelect(s)} style={{textAlign:"left",padding:"20px 22px",background:"var(--bg2)",boxShadow:"0 0 0 1px var(--brd),0 2px 8px rgba(0,0,0,0.25)",borderRadius:16,cursor:"pointer",transition:"box-shadow 0.25s cubic-bezier(0.2,0,0,1),transform 0.25s cubic-bezier(0.2,0,0,1)",animation:`cardIn 0.5s cubic-bezier(0.2,0,0,1) ${si*60}ms both`}}
+                  onMouseOver={e=>{e.currentTarget.style.boxShadow="0 0 0 1.5px var(--accent-border2),0 12px 40px rgba(0,0,0,0.45),0 0 32px var(--accent-glow)";e.currentTarget.style.transform="translateY(-3px) scale(1.015)"}}
+                  onMouseOut={e=>{e.currentTarget.style.boxShadow="0 0 0 1px var(--brd),0 2px 8px rgba(0,0,0,0.25)";e.currentTarget.style.transform="translateY(0) scale(1)"}}>
+                  <div style={{fontFamily:"'Playfair Display',serif",fontSize:17,fontWeight:700,color:"var(--t1)",marginBottom:6}}>{s.title}</div>
+                  <div style={{fontSize:12,color:"var(--t4)",marginBottom:8}}>by {s.author} · {s.genre}</div>
+                  <div style={{fontSize:14,color:"var(--t3)",lineHeight:1.55}}>{s.desc}</div>
+                  <div style={{marginTop:10,display:"flex",gap:8,flexWrap:"wrap"}}>
+                    {roles.map(c=><span key={c} style={{fontSize:11,padding:"2px 10px",borderRadius:20,background:gc(s,c)+"18",color:gc(s,c),fontWeight:600}}>{c}</span>)}
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function Memorizer({script,onBack,userName,onSessionComplete}){
+  const [step,setStep]=useState(0);
+  const [myRole,setMyRole]=useState(null);
+  const [ci,setCi]=useState(0);
+  const [rev,setRev]=useState(false);
+  const [mode,setMode]=useState("sequential");
+  const [cards,setCards]=useState([...script.lines]);
+  const [score,setScore]=useState(0);
+  const [tot,setTot]=useState(0);
+  const [shuffleKey,setShuffleKey]=useState(0);
+  const [stepAnim,setStepAnim]=useState(true);
+  const [shaking,setShaking]=useState(false);
+  const [hint,setHint]=useState(false);
+  const savedRef=React.useRef(false);
+
+  useEffect(()=>{if(step===3&&!savedRef.current&&tot>0&&onSessionComplete){savedRef.current=true;const pct=Math.round((score/tot)*100);onSessionComplete({scriptId:script.id,scriptTitle:script.title,role:myRole,score,total:tot,pct,mode,date:new Date().toISOString()});}},[step]);
+  useEffect(()=>{if(step!==3)savedRef.current=false;},[step]);
+
+  const roles=script.characters.filter(c=>c!=="BOTH"&&c!=="GIRLS");
+  const accent=myRole?gc(script,myRole):"var(--accent)";
+
+  function freshShuffle(arr){const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+  const switchMode=(m)=>{setMode(m);setShuffleKey(k=>k+1);};
+  const changeStep=(n)=>{setStepAnim(false);setTimeout(()=>{setStep(n);requestAnimationFrame(()=>setStepAnim(true));},190);};
+
+  useEffect(()=>{
+    let c=[...script.lines];
+    if(mode==="mylines")c=c.filter(x=>x.c===myRole||x.c==="BOTH"||x.c==="GIRLS");
+    if(mode==="random")c=freshShuffle(c.filter(x=>x.c===myRole||x.c==="BOTH"||x.c==="GIRLS"));
+    setCards(c);setCi(0);setRev(false);setHint(false);setScore(0);setTot(0);
+  },[mode,myRole,shuffleKey]);
+
+  const cur=cards[ci];
+  const isMine=cur&&(cur.c===myRole||cur.c==="BOTH"||cur.c==="GIRLS");
+  const cc=cur?gc(script,cur.c):"#fff";
+  const doNext=()=>{setCi(i=>Math.min(i+1,cards.length-1));setRev(false);setHint(false)};
+  const scoreN=(g)=>{if(g)setScore(s=>s+1);else{setShaking(true);setTimeout(()=>setShaking(false),520);}setTot(t=>t+1);ci<cards.length-1?doNext():changeStep(3)};
+  const restart=()=>{changeStep(2);if(mode==="random"){setShuffleKey(k=>k+1);}else{setCi(0);setRev(false);setScore(0);setTot(0);}};
+
+  const Btn=({onClick,disabled,label,primary})=>(
+    <button onClick={onClick} disabled={disabled} className={disabled?"":"btn-press"} style={{padding:"10px 26px",background:primary?accent+"22":"var(--bg2)",border:primary?`1px solid ${accent}55`:"1px solid var(--brd)",borderRadius:40,color:disabled?"var(--brd4)":primary?accent:"var(--t1)",fontSize:14,fontWeight:600,cursor:disabled?"not-allowed":"pointer",opacity:disabled?0.4:1}}>{label}</button>
+  );
+
+  return(
+    <div style={{animation:"fadeIn 0.4s ease"}}>
+      <button onClick={onBack} className="btn-press" style={{padding:"10px 16px",background:"transparent",border:"1px solid var(--brd2)",borderRadius:20,color:"var(--t4)",fontSize:12,cursor:"pointer",marginBottom:20}}>← All Scripts</button>
+      <div style={{textAlign:"center",marginBottom:24}}>
+        <h2 style={{fontFamily:"'Playfair Display',serif",fontSize:28,fontWeight:700,margin:"0 0 4px",textWrap:"balance"}}>{script.title}</h2>
+        <div style={{fontSize:13,color:"var(--t5)"}}>by {script.author} · {script.cast}</div>
+      </div>
+      <div style={{transition:"opacity 0.2s cubic-bezier(0.2,0,0,1),transform 0.2s cubic-bezier(0.2,0,0,1)",opacity:stepAnim?1:0,transform:stepAnim?"none":"translateY(8px)"}}>
+      {step===0&&(
+        <div style={{textAlign:"center"}}>
+          <div style={{background:"var(--bg2)",border:"2px solid var(--brd)",borderRadius:20,padding:"32px 24px",marginBottom:24}}>
+            <div style={{fontFamily:"'Playfair Display',serif",fontSize:17,lineHeight:1.7,marginBottom:16}}>{script.desc}</div>
+            <div style={{display:"flex",gap:14,justifyContent:"center",flexWrap:"wrap",fontSize:13,color:"var(--t4)"}}>
+              {roles.map(r=><span key={r}>{(script.emoji||{})[r]||"🎭"} <span style={{color:gc(script,r),fontWeight:600}}>{r}</span> · {script.lines.filter(x=>x.c===r).length} lines</span>)}
+            </div>
+          </div>
+          <button onClick={()=>changeStep(1)} className="btn-press" style={{padding:"14px 48px",background:`linear-gradient(135deg,${accent},${accent}cc)`,border:"none",borderRadius:40,color:"#1a1a1a",fontSize:15,fontWeight:700,cursor:"pointer",letterSpacing:1,textTransform:"uppercase"}}>Get Started</button>
+        </div>
+      )}
+
+      {step===1&&(
+        <div>
+          <p style={{textAlign:"center",fontSize:15,color:"var(--t3)",marginBottom:24}}>Pick your role — your lines will be hidden during practice</p>
+          <div style={{display:"flex",gap:12,justifyContent:"center",flexWrap:"wrap"}}>
+            {roles.map((name,ri)=>{
+              const a=myRole===name,col=gc(script,name);
+              return <button key={name} onClick={()=>setMyRole(name)} className="btn-press" style={{flex:1,minWidth:130,padding:"24px 16px",background:a?`linear-gradient(135deg,${col},${col}bb)`:"var(--bg2)",border:a?`2px solid ${col}`:"2px solid var(--brd2)",borderRadius:16,cursor:"pointer",transition:"background 0.3s cubic-bezier(0.2,0,0,1),border-color 0.3s cubic-bezier(0.2,0,0,1),transform 0.3s cubic-bezier(0.2,0,0,1)",transform:a?"scale(1.03)":"scale(1)",animation:`cardIn 0.4s cubic-bezier(0.2,0,0,1) ${ri*80}ms both`}}>
+                <div style={{fontSize:28,marginBottom:6}}>{(script.emoji||{})[name]||"🎭"}</div>
+                <div style={{fontFamily:"'Playfair Display',serif",fontSize:16,fontWeight:700,color:a?"#1a1a1a":"var(--t1)"}}>{name}</div>
+                <div style={{fontSize:12,color:a?"rgba(0,0,0,0.5)":"var(--t5)"}}>{script.lines.filter(x=>x.c===name).length} lines</div>
+              </button>;
+            })}
+          </div>
+          <div style={{display:"flex",justifyContent:"center",gap:12,marginTop:28}}>
+            <button onClick={()=>changeStep(0)} className="btn-press" style={{padding:"10px 24px",background:"transparent",border:"1px solid var(--brd2)",borderRadius:40,color:"var(--t3)",fontSize:13,cursor:"pointer"}}>← Back</button>
+            {myRole&&<button onClick={()=>{changeStep(2);switchMode("sequential")}} className="btn-press" style={{padding:"14px 40px",background:`linear-gradient(135deg,${accent},${accent}cc)`,border:"none",borderRadius:40,color:"#1a1a1a",fontSize:15,fontWeight:700,cursor:"pointer",letterSpacing:1,textTransform:"uppercase"}}>Start as {myRole}</button>}
+          </div>
+        </div>
+      )}
+
+      {step===2&&cards.length>0&&cur&&(
+        <div>
+          <div style={{display:"flex",justifyContent:"center",gap:6,marginBottom:18}}>
+            {[{id:"sequential",l:"In Order"},{id:"random",l:"Shuffle"},{id:"mylines",l:"My Lines"}].map(m=>
+              <button key={m.id} onClick={()=>switchMode(m.id)} className="btn-press" style={{padding:"10px 16px",background:mode===m.id?accent+"22":"var(--bg2)",border:mode===m.id?`1px solid ${accent}55`:"1px solid var(--brd)",borderRadius:20,color:mode===m.id?accent:"var(--t5)",fontSize:12,fontWeight:600,cursor:"pointer"}}>{m.l}</button>
+            )}
+          </div>
+          <div style={{width:"100%",height:3,background:"var(--brd)",borderRadius:2,marginBottom:22,overflow:"hidden"}}>
+            <div style={{width:`${((ci+1)/cards.length)*100}%`,height:"100%",background:`linear-gradient(90deg,${accent},${accent}cc)`,borderRadius:2,transition:"width 0.4s cubic-bezier(0.2,0,0,1)"}}/>
+          </div>
+          {(()=>{
+            const origIdx=script.lines.indexOf(cur);
+            const cue=(mode!=="sequential"&&isMine&&origIdx>0)?script.lines[origIdx-1]:null;
+            const cueColor=cue?gc(script,cue.c):"#fff";
+            return <>
+            {cue&&(
+              <div style={{background:"var(--bg2)",border:"1px solid var(--brd)",borderRadius:12,padding:"14px 20px",marginBottom:12,textAlign:"center"}}>
+                <div style={{fontSize:11,fontWeight:700,letterSpacing:1.5,textTransform:"uppercase",color:cueColor,marginBottom:8,opacity:0.7}}>↑ CUE — {cue.c}</div>
+                <div style={{fontFamily:"'Playfair Display',serif",fontSize:16,lineHeight:1.6,color:cueColor,opacity:0.85}}>&ldquo;{cue.l}&rdquo;</div>
+              </div>
+            )}
+            <div style={{background:"var(--bg2)",boxShadow:isMine?`0 0 0 1.5px ${cc}55,0 0 40px ${cc}12,0 4px 24px rgba(0,0,0,0.4)`:"0 0 0 1px var(--brd),0 2px 12px rgba(0,0,0,0.3)",borderRadius:20,padding:"42px 28px",minHeight:180,display:"flex",flexDirection:"column",justifyContent:"center",alignItems:"center",position:"relative",transition:"box-shadow 0.3s cubic-bezier(0.2,0,0,1)",animation:shaking?"shake 0.52s ease":""}}>
+              <div style={{position:"absolute",top:16,right:20,fontSize:13,color:"var(--t7)",fontVariantNumeric:"tabular-nums"}}>{ci+1}/{cards.length}</div>
+              <div style={{position:"absolute",top:16,left:20,fontSize:11,fontWeight:700,letterSpacing:1.5,textTransform:"uppercase",color:isMine?cc:"var(--t4)",background:(isMine?cc:"var(--t4)")+"15",padding:"4px 14px",borderRadius:8}}>
+                {isMine?(cur.c==="BOTH"?"★ BOTH":"★ YOUR LINE"):cur.c}
+              </div>
+              {isMine&&!rev?(
+                <div style={{textAlign:"center"}}>
+                  {hint?(
+                    <div style={{fontFamily:"'Playfair Display',serif",fontSize:17,color:cc+"90",marginBottom:22,animation:"fadeIn 0.3s ease"}}>&ldquo;{cur.l.split(/\s+/).slice(0,4).join(" ")}…&rdquo;</div>
+                  ):(
+                    <div style={{fontFamily:"'Playfair Display',serif",fontSize:17,fontStyle:"italic",color:cc+"80",marginBottom:22}}>What's your line?</div>
+                  )}
+                  <div style={{display:"flex",gap:10,justifyContent:"center"}}>
+                    {!hint&&<button onClick={()=>setHint(true)} className="btn-press" style={{padding:"12px 24px",background:"var(--bg3)",border:"1px solid var(--brd4)",borderRadius:40,color:"var(--t2)",fontSize:13,fontWeight:600,cursor:"pointer"}}>💡 Hint</button>}
+                    <button onClick={()=>{setTimeout(()=>setRev(true),80)}} className="btn-press" style={{padding:"12px 34px",background:`linear-gradient(135deg,${cc},${cc}cc)`,border:"none",borderRadius:40,color:"#1a1a1a",fontSize:14,fontWeight:700,cursor:"pointer",letterSpacing:1,textTransform:"uppercase"}}>Reveal</button>
+                  </div>
+                </div>
+              ):(
+                <div style={{fontFamily:"'Playfair Display',serif",fontSize:20,lineHeight:1.75,color:isMine?cc:"var(--t1)",textAlign:"center",maxWidth:520,animation:isMine&&rev?"revealLine 0.5s cubic-bezier(0.2,0,0,1)":"fadeIn 0.3s ease"}}>&ldquo;{cur.l}&rdquo;</div>
+              )}
+            </div>
+            </>;
+          })()}
+          <div style={{display:"flex",justifyContent:"center",gap:12,marginTop:22}}>
+            <Btn onClick={()=>{setCi(i=>Math.max(i-1,0));setRev(false);setHint(false)}} disabled={ci===0} label="← Prev"/>
+            {isMine&&!rev
+              ? <>{!hint&&<Btn onClick={()=>setHint(true)} label="💡 Hint"/>}<Btn onClick={()=>{setTimeout(()=>setRev(true),80)}} primary label="Reveal"/></>
+              : ci<cards.length-1
+                ? <Btn onClick={doNext} primary label="Next →"/>
+                : <Btn onClick={restart} primary label="↺ Restart"/>
+            }
+          </div>
+          {isMine&&rev&&(
+            <div style={{display:"flex",justifyContent:"center",gap:10,marginTop:14,animation:"fadeIn 0.3s ease"}}>
+              <button onClick={()=>scoreN(true)} className="btn-press btn-pulse-green" style={{padding:"10px 22px",background:"rgba(163,190,140,0.12)",border:"1px solid rgba(163,190,140,0.3)",borderRadius:20,color:"#A3BE8C",fontSize:13,fontWeight:600,cursor:"pointer"}}>✓ Got It</button>
+              <button onClick={()=>scoreN(false)} className="btn-press btn-pulse-red" style={{padding:"10px 22px",background:"rgba(191,97,106,0.12)",border:"1px solid rgba(191,97,106,0.3)",borderRadius:20,color:"#BF616A",fontSize:13,fontWeight:600,cursor:"pointer"}}>✗ Missed</button>
+            </div>
+          )}
+          <div style={{textAlign:"center",marginTop:24}}>
+            <button onClick={()=>{changeStep(1);setMyRole(null);setCi(0);switchMode("sequential")}} className="btn-press" style={{padding:"10px 18px",background:"transparent",border:"1px solid var(--bg4)",borderRadius:20,color:"var(--t7)",fontSize:12,cursor:"pointer"}}>Switch Role</button>
+          </div>
+        </div>
+      )}
+
+      {step===3&&(()=>{
+        const pct=tot>0?Math.round((score/tot)*100):0;
+        return <>{pct>=80&&<Confetti accent={accent}/>}<div style={{textAlign:"center",background:"var(--bg2)",border:"2px solid var(--brd)",borderRadius:20,padding:"44px 32px"}}>
+          <div style={{fontSize:52,marginBottom:14}}>{pct>=80?"🌟":pct>=50?"👏":"💪"}</div>
+          <div style={{fontFamily:"'Playfair Display',serif",fontSize:26,fontWeight:700,marginBottom:8,textWrap:"balance"}}>{pct>=80?"Brilliant!":pct>=50?"Almost There!":"Keep Practicing!"}</div>
+          <div style={{fontSize:15,color:"var(--t3)",marginBottom:28,fontVariantNumeric:"tabular-nums"}}>{score} of {tot} lines ({pct}%)</div>
+          <div style={{display:"flex",gap:12,justifyContent:"center",flexWrap:"wrap"}}>
+            <button onClick={restart} className="btn-press" style={{padding:"12px 34px",background:`linear-gradient(135deg,${accent},${accent}cc)`,border:"none",borderRadius:40,color:"#1a1a1a",fontSize:14,fontWeight:700,cursor:"pointer",textTransform:"uppercase"}}>Again</button>
+            <button onClick={()=>{changeStep(1);setMyRole(null)}} className="btn-press" style={{padding:"12px 24px",background:"var(--bg3)",border:"1px solid var(--brd2)",borderRadius:40,color:"var(--t2)",fontSize:14,cursor:"pointer"}}>Switch Role</button>
+          </div>
+        </div></>;      })()}
+      </div>
+    </div>
+  );
+}
+
+function LoginScreen({onLogin}){
+  const [name,setName]=useState("");
+  const [recent,setRecent]=useState([]);
+  useEffect(()=>{
+    try{const tid=localStorage.getItem("sm_theme")||"backstage";applyTheme(tid);}catch(e){applyTheme("backstage");}
+    try{const r=JSON.parse(localStorage.getItem("sm_recent_users")||"[]");setRecent(r.slice(0,5));}catch(e){}
+  },[]);
+  const submit=()=>{if(!name.trim())return;const n=name.trim();let r=[n,...(recent.filter(x=>x.toLowerCase()!==n.toLowerCase()))].slice(0,5);localStorage.setItem("sm_recent_users",JSON.stringify(r));onLogin(n);};
+  const themeObj=(()=>{try{return THEMES.find(t=>t.id===(localStorage.getItem("sm_theme")||"backstage"))||THEMES[0];}catch(e){return THEMES[0];}})();
+  return(
+    <div style={{minHeight:"100vh",background:themeObj.gradient,color:"var(--t1)",display:"flex",alignItems:"center",justifyContent:"center",padding:"36px 20px"}}>
+      <div style={{width:"100%",maxWidth:400,textAlign:"center",animation:"fadeIn 0.6s ease"}}>
+        
+        <h1 style={{fontFamily:"'Playfair Display',serif",fontSize:34,fontWeight:700,marginBottom:6}}>Memorize<span style={{color:"var(--accent)"}}>X</span></h1>
+        <p style={{fontSize:14,color:"var(--t5)",fontWeight:300,marginBottom:36}}>Enter your name to start practicing</p>
+        <div style={{display:"flex",gap:10,marginBottom:16}}>
+          <input value={name} onChange={e=>setName(e.target.value)} onKeyDown={e=>{if(e.key==="Enter")submit()}} placeholder="Your name" autoFocus style={{flex:1,padding:"14px 20px",background:"var(--bg3)",border:"2px solid var(--brd2)",borderRadius:14,color:"var(--t1)",fontFamily:"'DM Sans',sans-serif",fontSize:16,outline:"none",transition:"border-color 0.3s"}} onFocus={e=>e.target.style.borderColor="var(--accent-border2)"} onBlur={e=>e.target.style.borderColor="var(--brd2)"}/>
+          <button onClick={submit} style={{padding:"14px 28px",background:name.trim()?"linear-gradient(135deg,#D4A054,#B8862D)":"var(--brd)",border:"none",borderRadius:14,color:name.trim()?"#1a1a1a":"var(--t7)",fontSize:15,fontWeight:700,cursor:name.trim()?"pointer":"not-allowed",transition:"all 0.2s ease"}}>Go</button>
+        </div>
+        {recent.length>0&&(
+          <div style={{marginTop:24}}>
+            <div style={{fontSize:12,color:"var(--t6)",marginBottom:10}}>Recent</div>
+            <div style={{display:"flex",gap:8,justifyContent:"center",flexWrap:"wrap"}}>
+              {recent.map(r=><button key={r} onClick={()=>onLogin(r)} style={{padding:"8px 18px",background:"var(--bg3)",border:"1px solid var(--brd2)",borderRadius:30,color:"var(--t2)",fontSize:13,cursor:"pointer",transition:"all 0.2s ease"}} onMouseOver={e=>{e.target.style.borderColor="var(--accent-border2)";e.target.style.color="var(--accent)"}} onMouseOut={e=>{e.target.style.borderColor="var(--brd2)";e.target.style.color="var(--t2)"}}>{r}</button>)}
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function PracticeHistory({userName}){
+  const [history,setHistory]=useState([]);
+  useEffect(()=>{try{const h=JSON.parse(localStorage.getItem("sm_history_"+userName)||"[]");setHistory(h.slice(0,8));}catch(e){}},[userName]);
+  if(history.length===0)return null;
+  return(
+    <div style={{marginBottom:32}}>
+      <h2 style={{fontFamily:"'Playfair Display',serif",fontSize:18,fontWeight:700,marginBottom:12,color:"var(--t2)"}}>Your Recent Practice</h2>
+      <div style={{display:"flex",flexDirection:"column",gap:8}}>
+        {history.map((h,i)=>{
+          const d=new Date(h.date);
+          const timeStr=d.toLocaleDateString(undefined,{month:"short",day:"numeric"})+" · "+d.toLocaleTimeString(undefined,{hour:"numeric",minute:"2-digit"});
+          return(
+            <div key={i} style={{display:"flex",alignItems:"center",justifyContent:"space-between",padding:"12px 16px",background:"var(--bg2)",border:"1px solid var(--bg4)",borderRadius:12}}>
+              <div>
+                <div style={{fontSize:14,fontWeight:600,color:"var(--t1)"}}>{h.scriptTitle}</div>
+                <div style={{fontSize:12,color:"var(--t5)",marginTop:2}}>as {h.role} · {h.mode==="random"?"Shuffle":h.mode==="mylines"?"My Lines":"In Order"} · {timeStr}</div>
+              </div>
+              <div style={{fontSize:18,fontWeight:700,color:h.pct>=80?"#A3BE8C":h.pct>=50?"#EBCB8B":"#BF616A",fontVariantNumeric:"tabular-nums"}}>{h.pct}%</div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+function ReportModal({userName,onClose}){
+  const [tab,setTab]=useState("bug");
+  const [msg,setMsg]=useState("");
+  const [script,setScript]=useState("");
+  const [sent,setSent]=useState(false);
+  const [sending,setSending]=useState(false);
+  const [err,setErr]=useState("");
+
+  const submit=async()=>{
+    const text=tab==="bug"?msg.trim():script.trim();
+    if(!text){setErr("Please fill in the field before sending.");return;}
+    setSending(true);setErr("");
+    try{
+      const storageOk=typeof window!="undefined"&&window.storage&&typeof window.storage.set==="function";
+      if(storageOk){
+        const key="reports:"+Date.now()+":"+Math.random().toString(36).slice(2);
+        const val=JSON.stringify({type:tab,user:userName||"anonymous",text,ts:new Date().toISOString()});
+        await window.storage.set(key,val,true);
+      }else{
+        try{const r=JSON.parse(localStorage.getItem("sm_reports")||"[]");r.push({type:tab,user:userName||"anonymous",text,ts:new Date().toISOString()});localStorage.setItem("sm_reports",JSON.stringify(r.slice(-50)));}catch(e2){}
+      }
+      setSent(true);
+    }catch(e){
+      setErr("Couldn't send — please try again.");
+    }
+    setSending(false);
+  };
+
+  const accent="var(--accent)";
+  const tabStyle=(active)=>({
+    flex:1,padding:"8px 0",background:active?accent+"22":"transparent",
+    border:"none",borderBottom:active?`2px solid ${accent}`:"2px solid var(--brd)",
+    color:active?accent:"var(--t4)",fontSize:13,fontWeight:700,
+    letterSpacing:1,textTransform:"uppercase",cursor:"pointer",transition:"all 0.2s"
+  });
+
+  return(
+    <div style={{position:"fixed",inset:0,background:"var(--modal)",display:"flex",alignItems:"center",justifyContent:"center",zIndex:1000,padding:20,backdropFilter:"blur(4px)"}}
+      onClick={e=>{if(e.target===e.currentTarget)onClose()}}>
+      <div style={{width:"100%",maxWidth:460,background:"var(--card)",border:"1px solid var(--brd3)",borderRadius:24,padding:"32px 28px",animation:"fadeUp 0.25s ease"}}>
+        {sent?(
+          <div style={{textAlign:"center",padding:"16px 0"}}>
+            <div style={{fontSize:44,marginBottom:12}}>🎭</div>
+            <div style={{fontFamily:"'Playfair Display',serif",fontSize:22,fontWeight:700,marginBottom:8}}>Sent — thank you!</div>
+            <div style={{fontSize:14,color:"var(--t3)",marginBottom:24}}>Your {tab==="bug"?"report":"request"} has been received.</div>
+            <button onClick={onClose} style={{padding:"10px 32px",background:accent+"22",border:`1px solid ${accent}55`,borderRadius:40,color:accent,fontSize:14,fontWeight:600,cursor:"pointer"}}>Close</button>
+          </div>
+        ):(
+          <>
+            <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:20}}>
+              <div style={{fontFamily:"'Playfair Display',serif",fontSize:20,fontWeight:700}}>Community</div>
+              <button onClick={onClose} style={{background:"transparent",border:"none",color:"var(--t5)",fontSize:20,cursor:"pointer",lineHeight:1}}>×</button>
+            </div>
+            <div style={{display:"flex",marginBottom:24,borderBottom:"2px solid var(--brd)"}}>
+              <button style={tabStyle(tab==="bug")} onClick={()=>{setTab("bug");setMsg("");setErr("");}}>🐛 Bug Report</button>
+              <button style={tabStyle(tab==="request")} onClick={()=>{setTab("request");setScript("");setErr("");}}>📜 Script Request</button>
+            </div>
+            {tab==="bug"?(
+              <>
+                <div style={{fontSize:13,color:"var(--t3)",marginBottom:12,lineHeight:1.6}}>Something broken or behaving oddly? Tell us what happened.</div>
+                <textarea
+                  value={msg}
+                  onChange={e=>setMsg(e.target.value)}
+                  placeholder="Describe the bug — what you did, what you expected, what happened instead…"
+                  rows={5}
+                  style={{width:"100%",background:"var(--bg3)",border:"1px solid var(--brd3)",borderRadius:12,padding:"12px 14px",color:"var(--t1)",fontSize:14,fontFamily:"inherit",resize:"vertical",outline:"none",lineHeight:1.6,boxSizing:"border-box"}}
+                />
+              </>
+            ):(
+              <>
+                <div style={{fontSize:13,color:"var(--t3)",marginBottom:12,lineHeight:1.6}}>Want a script added? Tell us the title, playwright, and where to find it.</div>
+                <textarea
+                  value={script}
+                  onChange={e=>setScript(e.target.value)}
+                  placeholder='e.g. Waiting for Godot by Beckett — Act 1, Vladimir and Estragon. Include title, playwright, and a link if possible.'
+                  rows={5}
+                  style={{width:"100%",background:"var(--bg3)",border:"1px solid var(--brd3)",borderRadius:12,padding:"12px 14px",color:"var(--t1)",fontSize:14,fontFamily:"inherit",resize:"vertical",outline:"none",lineHeight:1.6,boxSizing:"border-box"}}
+                />
+              </>
+            )}
+            {err&&<div style={{marginTop:10,fontSize:13,color:"#BF616A"}}>{err}</div>}
+            <div style={{display:"flex",justifyContent:"flex-end",marginTop:18}}>
+              <button onClick={submit} disabled={sending} style={{padding:"11px 32px",background:sending?"var(--bg4)":`linear-gradient(135deg,${accent},${accent}cc)`,border:"none",borderRadius:40,color:sending?"var(--t5)":"#1a1a1a",fontSize:14,fontWeight:700,cursor:sending?"not-allowed":"pointer",letterSpacing:0.5}}>
+                {sending?"Sending…":"Send"}
+              </button>
+            </div>
+          </>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function AdminPanel({onClose}){
+  const [reports,setReports]=useState([]);
+  const [loading,setLoading]=useState(true);
+  const [filter,setFilter]=useState("all");
+  const [deleted,setDeleted]=useState(new Set());
+
+  useEffect(()=>{
+    const load=async()=>{
+      setLoading(true);
+      let found=[];
+      try{
+        const storageOk=typeof window!="undefined"&&window.storage&&typeof window.storage.list==="function";
+        if(storageOk){
+          const res=await window.storage.list("reports:",true);
+          const keys=(res&&res.keys)||[];
+          const items=await Promise.all(keys.map(async k=>{
+            try{const r=await window.storage.get(k,true);return r?{key:k,...JSON.parse(r.value)}:null;}catch(e){return null;}
+          }));
+          found=items.filter(Boolean);
+        } else {
+          const local=JSON.parse(localStorage.getItem("sm_reports")||"[]");
+          found=local.map((r,i)=>({key:"local:"+i,...r}));
+        }
+        found.sort((a,b)=>new Date(b.ts)-new Date(a.ts));
+        setReports(found);
+      }catch(e){console.error(e);}
+      setLoading(false);
+    };
+    load();
+  },[]);
+
+  const deleteReport=async(key)=>{
+    try{
+      const storageOk=typeof window!="undefined"&&window.storage&&typeof window.storage.delete==="function";
+      if(storageOk) await window.storage.delete(key,true);
+      setDeleted(d=>new Set([...d,key]));
+    }catch(e){}
+  };
+
+  const accent="var(--accent)";
+  const visible=reports.filter(r=>!deleted.has(r.key)&&(filter==="all"||r.type===filter));
+  const bugs=reports.filter(r=>!deleted.has(r.key)&&r.type==="bug").length;
+  const reqs=reports.filter(r=>!deleted.has(r.key)&&r.type==="request").length;
+
+  const fmt=(ts)=>{try{return new Date(ts).toLocaleString();}catch(e){return ts;}};
+
+  return(
+    <div style={{position:"fixed",inset:0,background:"var(--modal)",display:"flex",alignItems:"center",justifyContent:"center",zIndex:2000,padding:20,backdropFilter:"blur(6px)"}}>
+      <div style={{width:"100%",maxWidth:640,maxHeight:"85vh",background:"var(--card)",border:"1px solid var(--accent-border2)",borderRadius:24,display:"flex",flexDirection:"column",overflow:"hidden",boxShadow:"0 24px 80px rgba(0,0,0,0.8)"}}>
+
+        {/* Header */}
+        <div style={{padding:"24px 28px 16px",borderBottom:"1px solid var(--brd)",flexShrink:0}}>
+          <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:16}}>
+            <div>
+              <div style={{fontFamily:"'Playfair Display',serif",fontSize:20,fontWeight:700}}>Admin Panel</div>
+              <div style={{fontSize:12,color:"var(--t5)",marginTop:2}}>Community submissions</div>
+            </div>
+            <button onClick={onClose} style={{background:"transparent",border:"1px solid var(--brd3)",borderRadius:20,color:"var(--t3)",fontSize:13,cursor:"pointer",padding:"6px 14px"}}>Close</button>
+          </div>
+          <div style={{display:"flex",gap:8}}>
+            {[["all","All","#888",bugs+reqs],["bug","Bugs","#BF616A",bugs],["request","Requests","#A3BE8C",reqs]].map(([id,label,col,count])=>(
+              <button key={id} onClick={()=>setFilter(id)} style={{padding:"5px 14px",borderRadius:20,border:filter===id?`1px solid ${col}55`:"1px solid var(--brd)",background:filter===id?col+"18":"transparent",color:filter===id?col:"var(--t4)",fontSize:12,fontWeight:600,cursor:"pointer"}}>
+                {label} <span style={{opacity:0.7}}>({count})</span>
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Body */}
+        <div style={{overflowY:"auto",flex:1,padding:"16px 28px 24px"}}>
+          {loading?(
+            <div style={{textAlign:"center",padding:"40px 0",color:"var(--t5)",fontSize:14}}>Loading reports…</div>
+          ):visible.length===0?(
+            <div style={{textAlign:"center",padding:"40px 0",color:"var(--t6)",fontSize:14}}>No {filter==="all"?"submissions":filter+"s"} yet.</div>
+          ):(
+            <div style={{display:"flex",flexDirection:"column",gap:12}}>
+              {visible.map(r=>(
+                <div key={r.key} style={{background:"var(--bg2)",border:`1px solid ${r.type==="bug"?"rgba(191,97,106,0.2)":"rgba(163,190,140,0.2)"}`,borderRadius:14,padding:"16px 18px"}}>
+                  <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:8}}>
+                    <div style={{display:"flex",alignItems:"center",gap:8}}>
+                      <span style={{fontSize:11,fontWeight:700,letterSpacing:1,textTransform:"uppercase",padding:"3px 10px",borderRadius:20,background:r.type==="bug"?"rgba(191,97,106,0.15)":"rgba(163,190,140,0.15)",color:r.type==="bug"?"#BF616A":"#A3BE8C"}}>{r.type==="bug"?"Bug":"Request"}</span>
+                      <span style={{fontSize:12,color:"var(--t3)"}}>{r.user||"anonymous"}</span>
+                    </div>
+                    <div style={{display:"flex",alignItems:"center",gap:10}}>
+                      <span style={{fontSize:11,color:"var(--t7)"}}>{fmt(r.ts)}</span>
+                      <button onClick={()=>deleteReport(r.key)} title="Dismiss" style={{background:"transparent",border:"none",color:"var(--t7)",cursor:"pointer",fontSize:16,lineHeight:1,padding:"0 2px"}}>&times;</button>
+                    </div>
+                  </div>
+                  <div style={{fontSize:14,color:"var(--t1)",lineHeight:1.6,whiteSpace:"pre-wrap"}}>{r.text}</div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ============================================================
+// UPDATES LOG — add new entries at the TOP of this array
+// Each entry: { version, date, title, items:[] }
+// ============================================================
+const UPDATES = [
+  {
+    version: "1.4",
+    date: "April 2026",
+    title: "Hints, Custom Scripts & Themes",
+    items: [
+    "💡 Hint button — preview the first few words before revealing your line",
+    "📋 Paste script with AI parser/formatter — quickly format and load scripts",
+    "🔥 Streak tracker — tracks consecutive days of practice",
+    "🎨 Color theme packs — customize the app’s look"
+    ]
+  },
+  {
+    version: "1.3",
+    date: "April 2026",
+    title: "Community & Admin",
+    items: [
+      "Added community 💬 report button — submit bug reports or script requests",
+      "Added password-protected admin panel to review all submissions",
+      "Reports include username and timestamp"
+    ]
+  },
+  {
+    version: "1.2",
+    date: "April 2026",
+    title: "Shuffle Cue Lines",
+    items: [
+      "Shuffle mode now shows the other character's line before yours as a cue",
+      "Fixed Next button — you must Reveal your line before moving on",
+      "Fixed score tracking so lines can never be double-counted"
+    ]
+  },
+  {
+    version: "1.1",
+    date: "April 2026",
+    title: "New Scripts & Bug Fixes",
+    items: [
+      "Added 4 new scripts: My First Lockdown, Bargain Store Brawl, Devon and Hamid, Cosette and Catherine",
+      "Fixed shuffle to truly re-randomize on every restart",
+      "Fixed character colour assignments for all scripts"
+    ]
+  },
+  {
+    version: "1.0",
+    date: "April 2026",
+    title: "Initial Release",
+    items: [
+      "Script Memorizer launches with 15 scripts",
+      "Pick your role, hide your lines, reveal and score yourself",
+      "In Order, Shuffle, and My Lines practice modes",
+      "Practice history tracked per user"
+    ]
+  }
+];
+const LATEST_VERSION = "1.4";
+
+function App(){
+  const [userName,setUserName]=useState(()=>{try{return localStorage.getItem("sm_current_user")||"";}catch(e){return "";}});
+  const [sel,setSel]=useState(null);
+  const [showReport,setShowReport]=useState(false);
+  const [showAdmin,setShowAdmin]=useState(false);
+  const [adminInput,setAdminInput]=useState("");
+  const [adminError,setAdminError]=useState(false);
+  const [adminUnlocked,setAdminUnlocked]=useState(false);
+  const [showChangelog,setShowChangelog]=useState(false);
+  const [seenVersion,setSeenVersion]=useState(()=>{try{return localStorage.getItem("sm_seen_version")||"";}catch(e){return "";}});
+  const [showCreator,setShowCreator]=useState(false);
+  const [customScripts,setCustomScripts]=useState(()=>{try{return JSON.parse(localStorage.getItem("sm_custom_scripts")||"[]");}catch(e){return[];}});
+  const [theme,setTheme]=useState(()=>{try{return localStorage.getItem("sm_theme")||"backstage";}catch(e){return"backstage";}});
+  const [showThemes,setShowThemes]=useState(false);
+
+  const themeObj=THEMES.find(t=>t.id===theme)||THEMES[0];
+  const isDark=themeObj.type==="dark";
+  const bg=themeObj.gradient;
+  const fg=themeObj.vars.t1;
+
+  useEffect(()=>{applyTheme(theme);},[theme]);
+
+  const selectTheme=(id)=>{setTheme(id);try{localStorage.setItem("sm_theme",id);}catch(e){};};
+
+  const handleLogin=(name)=>{
+    setUserName(name);
+    try{localStorage.setItem("sm_current_user",name);}catch(e){}
+    const seen=localStorage.getItem("sm_seen_version")||"";
+    if(seen!==LATEST_VERSION) setShowChangelog(true);
+  };
+  const handleLogout=()=>{setUserName("");try{localStorage.removeItem("sm_current_user");}catch(e){}};
+  const handleSessionComplete=(session)=>{try{const key="sm_history_"+userName;const h=JSON.parse(localStorage.getItem(key)||"[]");h.unshift(session);localStorage.setItem(key,JSON.stringify(h.slice(0,50)));}catch(e){}};
+  const dismissChangelog=()=>{
+    setShowChangelog(false);
+    setSeenVersion(LATEST_VERSION);
+    try{localStorage.setItem("sm_seen_version",LATEST_VERSION);}catch(e){}
+  };
+  const handleSaveScript=(s)=>{
+    const updated=[...customScripts,s];
+    setCustomScripts(updated);
+    try{localStorage.setItem("sm_custom_scripts",JSON.stringify(updated));}catch(e){}
+    setShowCreator(false);
+  };
+
+  const tryAdmin=()=>{
+    if(adminInput==="Dayyan143:"){setAdminUnlocked(true);setAdminError(false);}
+    else{setAdminError(true);setAdminInput("");}
+  };
+
+  if(!userName)return <LoginScreen onLogin={handleLogin}/>;
+
+  return(
+    <div style={{minHeight:"100vh",background:bg,color:fg,padding:"36px 20px",display:"flex",flexDirection:"column",alignItems:"center",transition:"background 0.4s ease,color 0.4s ease"}}>
+      {showCreator&&<ScriptCreator onClose={()=>setShowCreator(false)} onSave={handleSaveScript}/>}
+      {showThemes&&<ThemePicker current={theme} onSelect={(id)=>{selectTheme(id);setShowThemes(false)}} onClose={()=>setShowThemes(false)}/>}
+      {showReport&&<ReportModal userName={userName} onClose={()=>setShowReport(false)}/>}
+      {showChangelog&&(
+        <div style={{position:"fixed",inset:0,background:"var(--modal)",display:"flex",alignItems:"center",justifyContent:"center",zIndex:1500,padding:20,backdropFilter:"blur(6px)"}} onClick={e=>{if(e.target===e.currentTarget)dismissChangelog();}}>
+          <div style={{width:"100%",maxWidth:500,maxHeight:"80vh",background:"var(--card)",border:"1px solid var(--accent-border2)",borderRadius:24,display:"flex",flexDirection:"column",overflow:"hidden",boxShadow:"0 24px 80px rgba(0,0,0,0.8)",animation:"fadeUp 0.3s ease"}}>
+            <div style={{padding:"24px 28px 16px",borderBottom:"1px solid var(--brd)",flexShrink:0,display:"flex",alignItems:"center",justifyContent:"space-between"}}>
+              <div>
+                <div style={{fontSize:11,fontWeight:700,letterSpacing:3,textTransform:"uppercase",color:"var(--accent-med)",marginBottom:4}}>What's New</div>
+                <div style={{fontFamily:"'Playfair Display',serif",fontSize:22,fontWeight:700}}>Latest Updates</div>
+              </div>
+              <button onClick={dismissChangelog} style={{background:"transparent",border:"1px solid var(--brd3)",borderRadius:20,color:"var(--t3)",fontSize:13,cursor:"pointer",padding:"6px 14px",flexShrink:0}}>✕ Close</button>
+            </div>
+            <div style={{overflowY:"auto",flex:1,padding:"20px 28px 28px"}}>
+              {UPDATES.map((u,ui)=>(
+                <div key={u.version} style={{marginBottom:ui<UPDATES.length-1?28:0}}>
+                  <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:12}}>
+                    <span style={{fontSize:11,fontWeight:700,padding:"3px 10px",borderRadius:20,background:ui===0?"var(--accent-bg3)":"var(--bg4)",color:ui===0?"var(--accent)":"var(--t5)",letterSpacing:0.5}}>v{u.version}</span>
+                    <span style={{fontFamily:"'Playfair Display',serif",fontSize:16,fontWeight:700,color:ui===0?"var(--t1)":"var(--t2)"}}>{u.title}</span>
+                    <span style={{fontSize:11,color:"var(--t7)",marginLeft:"auto"}}>{u.date}</span>
+                  </div>
+                  <ul style={{listStyle:"none",padding:0,margin:0,display:"flex",flexDirection:"column",gap:7}}>
+                    {u.items.map((item,ii)=>(
+                      <li key={ii} style={{display:"flex",gap:10,fontSize:13,color:ui===0?"var(--t2)":"var(--t4)",lineHeight:1.5}}>
+                        <span style={{color:ui===0?"var(--accent)":"var(--t7)",flexShrink:0,marginTop:1}}>◆</span>
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+      {showAdmin&&(
+        adminUnlocked
+          ? <AdminPanel onClose={()=>{setShowAdmin(false);setAdminUnlocked(false);setAdminInput("");}}/>
+          : <div style={{position:"fixed",inset:0,background:"var(--modal)",display:"flex",alignItems:"center",justifyContent:"center",zIndex:2000,backdropFilter:"blur(6px)"}} onClick={e=>{if(e.target===e.currentTarget){setShowAdmin(false);setAdminInput("");setAdminError(false);}}}>
+              <div style={{background:"var(--card)",border:"1px solid var(--accent-border)",borderRadius:20,padding:"36px 32px",width:"100%",maxWidth:360,textAlign:"center"}}>
+                <div style={{fontSize:28,marginBottom:12}}>🔐</div>
+                <div style={{fontFamily:"'Playfair Display',serif",fontSize:20,fontWeight:700,marginBottom:6}}>Admin Access</div>
+                <div style={{fontSize:13,color:"var(--t4)",marginBottom:24}}>Enter your password to continue</div>
+                <input
+                  type="password"
+                  value={adminInput}
+                  onChange={e=>{setAdminInput(e.target.value);setAdminError(false);}}
+                  onKeyDown={e=>e.key==="Enter"&&tryAdmin()}
+                  placeholder="Password"
+                  autoFocus
+                  style={{width:"100%",boxSizing:"border-box",padding:"12px 16px",background:"var(--bg4)",border:adminError?"1px solid #BF616A":"1px solid var(--brd3)",borderRadius:12,color:"var(--t1)",fontSize:15,outline:"none",marginBottom:8,textAlign:"center",letterSpacing:2}}
+                />
+                {adminError&&<div style={{fontSize:12,color:"#BF616A",marginBottom:8}}>Incorrect password</div>}
+                <button onClick={tryAdmin} style={{marginTop:8,width:"100%",padding:"12px",background:"linear-gradient(135deg,#D4A054,#D4A054cc)",border:"none",borderRadius:12,color:"#1a1a1a",fontSize:14,fontWeight:700,cursor:"pointer"}}>Unlock</button>
+              </div>
+            </div>
+      )}
+      <div style={{position:"fixed",bottom:24,right:24,zIndex:900,display:"flex",flexDirection:"column",gap:8,alignItems:"center"}}>
+        <button onClick={()=>{setShowAdmin(true);setAdminUnlocked(false);setAdminInput("");setAdminError(false);}} title="Admin panel" style={{width:36,height:36,borderRadius:"50%",background:"var(--card)",border:"1px solid var(--brd)",color:"var(--t7)",fontSize:14,cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",boxShadow:"0 2px 12px rgba(0,0,0,0.4)",backdropFilter:"blur(6px)",transition:"all 0.2s"}}
+          onMouseOver={e=>{e.currentTarget.style.borderColor="var(--accent-border2)";e.currentTarget.style.color="var(--accent-med)";}}
+          onMouseOut={e=>{e.currentTarget.style.borderColor="var(--brd)";e.currentTarget.style.color="var(--t7)";}}
+        >⚙</button>
+        <button onClick={()=>setShowReport(true)} title="Report a bug or request a script" style={{width:44,height:44,borderRadius:"50%",background:"var(--card)",border:"1px solid var(--brd4)",color:"var(--t3)",fontSize:18,cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",boxShadow:"0 4px 20px rgba(0,0,0,0.5)",backdropFilter:"blur(6px)",transition:"all 0.2s"}}
+          onMouseOver={e=>{e.currentTarget.style.borderColor="var(--accent-med)";e.currentTarget.style.color="var(--accent)";}}
+          onMouseOut={e=>{e.currentTarget.style.borderColor="var(--brd4)";e.currentTarget.style.color="var(--t3)";}}
+        >💬</button>
+      </div>
+      <div style={{width:"100%",maxWidth:720}}>
+        <div style={{textAlign:"center",marginBottom:sel?20:32}}>
+          <div style={{fontSize:11,fontWeight:700,letterSpacing:4,textTransform:"uppercase",color:"var(--accent-dim)",marginBottom:10}}>MemorizeX</div>
+          {!sel&&<h1 style={{fontFamily:"'Playfair Display',serif",fontSize:34,fontWeight:700,margin:"0 0 6px",textWrap:"balance"}}>Hey, {userName}</h1>}
+          {!sel&&<p style={{fontSize:14,color:"var(--t5)",fontWeight:300,marginBottom:4}}>{SCRIPTS.length+customScripts.length} scripts · Pick one, choose your role, practice</p>}
+          {!sel&&<div style={{display:"flex",gap:12,justifyContent:"center",alignItems:"center",flexWrap:"wrap"}}>
+            <StreakBadge userName={userName}/>
+            <button onClick={handleLogout} style={{padding:"4px 14px",background:"transparent",border:"none",color:"var(--t7)",fontSize:12,cursor:"pointer",textDecoration:"underline",textUnderlineOffset:3}}>Not {userName}?</button>
+            <button onClick={()=>setShowThemes(true)} style={{padding:"4px 12px",background:"var(--bg3)",border:"1px solid var(--brd3)",borderRadius:20,color:"var(--t3)",fontSize:12,cursor:"pointer",transition:"all 0.2s"}}
+              onMouseOver={e=>{e.currentTarget.style.borderColor="var(--accent)";e.currentTarget.style.color="var(--accent)"}}
+              onMouseOut={e=>{e.currentTarget.style.borderColor="var(--brd3)";e.currentTarget.style.color="var(--t3)"}}>
+              🎨 Themes
+            </button>
+            <button onClick={()=>setShowChangelog(true)} style={{padding:"4px 12px",background:"var(--accent-bg)",border:"1px solid var(--accent-border)",borderRadius:20,color:"var(--accent-bright)",fontSize:11,fontWeight:700,letterSpacing:0.5,cursor:"pointer",transition:"all 0.2s"}}
+              onMouseOver={e=>{e.currentTarget.style.background="var(--accent-bg3)";e.currentTarget.style.color="var(--accent)";}}
+              onMouseOut={e=>{e.currentTarget.style.background="var(--accent-bg)";e.currentTarget.style.color="var(--accent-bright)";}}>
+              ✦ What's New
+            </button>
+          </div>}
+        </div>
+        {sel?<Memorizer script={sel} onBack={()=>setSel(null)} userName={userName} onSessionComplete={handleSessionComplete}/>:<>{!sel&&<PracticeHistory userName={userName}/>}<Landing onSelect={setSel} onAddScript={()=>setShowCreator(true)} customScripts={customScripts}/></>}
+      </div>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+</body>
+</html>
